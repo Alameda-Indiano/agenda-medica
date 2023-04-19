@@ -1,0 +1,1 @@
+npx sequelize-cli model:generate --name Schedules --attributes name:string,schedule_date:date,status:enum,patient_id:INTEGER,doctor_id:INTEGER
