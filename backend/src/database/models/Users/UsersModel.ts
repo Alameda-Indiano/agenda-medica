@@ -5,7 +5,7 @@ import {
     CreationOptional,
 } from 'sequelize';
 
-class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
+class UsersModel extends Model<InferAttributes<UsersModel>, InferCreationAttributes<UsersModel>> {
 
     declare id?: CreationOptional<string>;
     declare name: string;
@@ -14,4 +14,4 @@ class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttribute
 
 };
 
-export { UserModel };
+export { UsersModel };

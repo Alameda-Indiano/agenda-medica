@@ -1,16 +1,16 @@
-import { UserModel } from "../../../database/models/User/UserModel";
+import { UsersModel } from "../../../database/models/Users/UsersModel";
 import { User } from "../../../entities/User";
 import { IUserRepository } from "../IUsersRepositories";
 
 class UsersRepositoryInDatabase implements IUserRepository {
 
     async create({ name, email, password, username }: User): Promise<User> {
-        const user = await UserModel.create({ name, email, password, username });
+        const user = await UsersModel.create({ name, email, password, username });
         return user;
     };
 
     async exists(email: string): Promise<boolean> {
-        const user = await UserModel.findOne({ where: { email } });
+        const user = await UsersModel.findOne({ where: { email } });
         return !!user;
     };
 

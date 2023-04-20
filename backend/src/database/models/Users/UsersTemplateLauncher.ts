@@ -1,10 +1,10 @@
 import { DataTypes, Sequelize } from 'sequelize';
 import { ITemplateLauncher } from '../IModels';
-import { UserModel } from './UserModel';
+import { UsersModel } from './UsersModel';
 
-const UserTemplateLauncher: ITemplateLauncher = {
+const UsersTemplateLauncher: ITemplateLauncher = {
     init: (sequelize: Sequelize) => {
-        UserModel.init({
+        UsersModel.init({
             id: {
                 type: DataTypes.UUIDV4,
                 primaryKey: true,
@@ -35,4 +35,4 @@ const UserTemplateLauncher: ITemplateLauncher = {
     },
 };
 
-export { UserTemplateLauncher };
+export { UsersTemplateLauncher };
