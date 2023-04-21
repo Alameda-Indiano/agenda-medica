@@ -16,13 +16,13 @@ class CreateUserService {
         private usersRepository: IUserRepository
     ) {};
 
-    async execute({ name, username, email, password }: IRequestCreateUserDTO): Promise<Either<ParametersError, IResponseSucess<User>>> {
+    async execute({ name, email, password }: IRequestCreateUserDTO): Promise<Either<ParametersError, IResponseSucess<User>>> {
         
         const userAlreadyExists = await this.usersRepository.exists(email);
 
         if (!!userAlreadyExists) return error(new ParametersError('User Already Exists!', statuscode.CONFLICT));
 
-        const newUser = User.create({ name, username, email, password });
+        const newUser = User.create({ name, email, password });
 
         if (newUser.isException()) {
             const { statusCode, message } = newUser.exception;
@@ -31,11 +31,11 @@ class CreateUserService {
 
         if (newUser.isSucess()) {
 
-            let { name, username, email, password } = newUser.sucess;
+            let { name, email, password } = newUser.sucess;
 
             password = bcrypt.hashSync(password, 8);
 
-            const user = await this.usersRepository.create({ name, username, email, password });
+            const user = await this.usersRepository.create({ name, email, password });
 
             if (!user) return error(new ParametersError('Error registering user!', statuscode.BAD_REQUEST));
     

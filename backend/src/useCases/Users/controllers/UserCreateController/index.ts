@@ -17,9 +17,9 @@ class CreateUserController {
 
         try {
             
-            const { name, username, email, password } = req.body;
+            const { name, email, password } = req.body;
 
-            const result = await this.createUser.execute({ name, username, email, password });
+            const result = await this.createUser.execute({ name, email, password });
 
             if (result.isException()) {
 
@@ -36,7 +36,7 @@ class CreateUserController {
                 const { 
                     message, 
                     statusCode,
-                    value: { id, name, username, email }
+                    value: { id, name, email }
                 } = result.sucess;
 
                 return res.status(statusCode).json({ 
@@ -44,8 +44,7 @@ class CreateUserController {
                     statusCode,
                     value: {
                         id: id as string, 
-                        name, 
-                        username, 
+                        name,  
                         email
                     }
                 });
