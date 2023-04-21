@@ -16,7 +16,7 @@ class UsersRepositoryInMemory implements IUserRepository {
     };
 
     async exists(email: string): Promise<boolean> {
-        const user = this.users.some((user) => user.email === email);
+        const user = this.users.some((user) => user.email.value as any === email);
         return user;
     };
 

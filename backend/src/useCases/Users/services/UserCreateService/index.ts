@@ -1,10 +1,10 @@
 import { IUserRepository } from '../../../../repositories/Users/IUsersRepositories';
 import { User } from '../../../../entities/User';
 import { IRequestCreateUserDTO } from '../../IUserDTOs';
-import { Either, error, sucess } from '../../../../shared/either';
-import { ParametersError } from '../../../../shared/ParametersError';
-import { IResponseSucess } from '../../../../shared/ParametersSucess/IResponseSucess';
-import { ParametersSucess } from '../../../../shared/ParametersSucess';
+import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
+import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
+import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
+import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 import bcrypt from 'bcryptjs';
 
@@ -33,7 +33,10 @@ class CreateUserService {
 
             let { name, email, password } = newUser.sucess;
 
+            //@ts-ignores
             password = bcrypt.hashSync(password, 8);
+
+            console.log(password)
 
             const user = await this.usersRepository.create({ name, email, password });
 

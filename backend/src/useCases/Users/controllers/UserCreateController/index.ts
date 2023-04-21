@@ -1,9 +1,9 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
-import { IResponseError } from "../../../../shared/ParametersError/IResponseError";
+import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
 import { IRequestCreateUserDTO } from "../../IUserDTOs";
 import { CreateUserService } from "../../services/UserCreateService";
-import { IResponseSucess } from "../../../../shared/ParametersSucess/IResponseSucess";
+import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { User } from "../../../../entities/User";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 

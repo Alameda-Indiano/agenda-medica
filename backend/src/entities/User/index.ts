@@ -1,5 +1,5 @@
-import { Either, error, sucess } from "../../shared/either";
-import { ParametersError } from "../../shared/ParametersError";
+import { Either, error, sucess } from "../../shared/ErrorHandling/Either";
+import { ParametersError } from "../../shared/ErrorHandling/ParametersError";
 import { Email } from "./validator/email";
 import { Name } from "./validator/name";
 import { Password } from "./validator/password";

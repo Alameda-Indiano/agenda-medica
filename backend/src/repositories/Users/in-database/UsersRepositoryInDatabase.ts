@@ -1,5 +1,5 @@
 import { UsersModel } from "../../../database/models/Users/UsersModel";
-import { IDataUser, User } from "../../../entities/User";
+import { User } from "../../../entities/User";
 import { IUserRepository } from "../IUsersRepositories";
 
 class UsersRepositoryInDatabase implements IUserRepository {

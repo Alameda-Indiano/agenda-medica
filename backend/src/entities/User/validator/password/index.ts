@@ -1,7 +1,7 @@
-import { Either, error, sucess } from "../../../../shared/either";
+import { Either, error, sucess } from "../../../../shared/ErrorHandling/Either";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
-import { ParametersError } from "../../../../shared/ParametersError";
-import { PasswordValidate } from "../../../../utils/PasswordValidate";
+import { ParametersError } from "../../../../shared/ErrorHandling/ParametersError";
+import { PasswordValidate } from "../../../../shared/utils/PasswordValidate";
 
 class Password {
 

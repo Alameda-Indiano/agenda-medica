@@ -1,7 +1,7 @@
-import { Either, error, sucess } from "../../../../shared/either";
+import { Either, error, sucess } from "../../../../shared/ErrorHandling/Either";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
-import { ParametersError } from "../../../../shared/ParametersError";
-import { UserFullNameValidate } from "../../../../utils/UserFullNameValidate";
+import { ParametersError } from "../../../../shared/ErrorHandling/ParametersError";
+import { UserFullNameValidate } from "../../../../shared/utils/UserFullNameValidate";
 
 class Name {
 

@@ -4,7 +4,6 @@ import { Database } from "../../../../database/config/Database";
 import request from "supertest";
 import { InitializeModels } from "../../../../database/InitializeModels";
 import { Express } from "express";
-import { IRequestCreateUserDTO } from "../../IUserDTOs";
 import { v4 as uuid } from "uuid";
 
 describe('Controle de Criação de Usuário - CreateUserController', () => {

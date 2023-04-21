@@ -6,7 +6,6 @@ describe("Entidade de Usuário", () => {
 
         const dataUser: IDataUser = {
             name: "Teste",
-            username: "Teste",
             email: "Teste@gmail.com",
             password: "Teste123"
         };
@@ -25,7 +24,6 @@ describe("Entidade de Usuário", () => {
 
         const dataUser: IDataUser = {
             name: "Teste",
-            username: "Teste",
             email: "Teste@gmail.com",
             password: "Teste123"
         };

@@ -1,6 +1,5 @@
 import { CreateUserService } from ".";
 import { UsersRepositoryInMemory } from "../../../../repositories/Users/in-memory/UsersRepositoryInMemory";
-import { IRequestCreateUserDTO } from "../../IUserDTOs";
 import { v4 as uuid } from "uuid";
 
 describe('Serviço de Criação de Usuário - UserCreateService', () => {

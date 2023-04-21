@@ -1,4 +1,4 @@
-import { code } from "../interfaces/StatusCode";
+import { code } from "../../interfaces/StatusCode";
 
 class ParametersError extends Error {
 

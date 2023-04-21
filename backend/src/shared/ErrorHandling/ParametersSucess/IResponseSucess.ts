@@ -1,4 +1,4 @@
-import { code } from "../interfaces/StatusCode";
+import { code } from "../../interfaces/StatusCode";
 
 interface IResponseSucess<T> {
     message: string;
