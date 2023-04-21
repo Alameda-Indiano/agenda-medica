@@ -1,9 +1,9 @@
-interface IRequestCreateUserDTO {
+interface ICreateUserDTO {
     name: string;
     email: string;
     password: string;
 };
 
 export {
-    IRequestCreateUserDTO
+    ICreateUserDTO
 };

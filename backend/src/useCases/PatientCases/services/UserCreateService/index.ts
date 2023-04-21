@@ -1,6 +1,6 @@
 import { IUserRepository } from '../../../../repositories/Users/IUsersRepositories';
 import { User } from '../../../../entities/User';
-import { IRequestCreateUserDTO } from '../../IUserDTOs';
+import { ICreateUserDTO } from '../../IUserDTOs/ICreateUserDTO';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
 import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
@@ -16,7 +16,7 @@ class CreateUserService {
         private usersRepository: IUserRepository
     ) {};
 
-    async execute({ name, email, password }: IRequestCreateUserDTO): Promise<Either<ParametersError, IResponseSucess<User>>> {
+    async execute({ name, email, password }: ICreateUserDTO): Promise<Either<ParametersError, IResponseSucess<User>>> {
         
         const userAlreadyExists = await this.usersRepository.exists(email);
 

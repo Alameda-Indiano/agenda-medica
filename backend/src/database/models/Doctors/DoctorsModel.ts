@@ -6,13 +6,15 @@ import {
     NonAttribute,
     Association,
 } from 'sequelize';
+import { Email } from '../../../entities/Doctors/validator/email';
+import { Name } from '../../../entities/Doctors/validator/name';
 import { SchedulesModel } from '../Schedules/SchedulesModel';
 
 class DoctorsModel extends Model<InferAttributes<DoctorsModel>, InferCreationAttributes<DoctorsModel>> {
 
     declare id?: CreationOptional<string>;
-    declare name: string;
-    declare email: string;
+    declare name: Name | string;
+    declare email: Email | string;
 
     declare schedules?: NonAttribute<SchedulesModel[]>;
 

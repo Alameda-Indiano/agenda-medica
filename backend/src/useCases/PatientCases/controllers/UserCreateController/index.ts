@@ -1,7 +1,7 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { IRequestCreateUserDTO } from "../../IUserDTOs";
+import { ICreateUserDTO } from "../../IUserDTOs/ICreateUserDTO";
 import { CreateUserService } from "../../services/UserCreateService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { User } from "../../../../entities/User";
@@ -13,7 +13,7 @@ class CreateUserController {
         private createUser: CreateUserService
     ) {};
 
-    async handle(req: IRequest<IRequestCreateUserDTO>, res: IResponse<IResponseError | IResponseSucess<Omit<User, 'password'>>>) {
+    async handle(req: IRequest<ICreateUserDTO>, res: IResponse<IResponseError | IResponseSucess<Omit<User, 'password'>>>) {
 
         try {
             
