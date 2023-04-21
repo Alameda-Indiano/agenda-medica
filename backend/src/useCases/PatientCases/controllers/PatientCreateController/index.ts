@@ -1,25 +1,25 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ICreateUserDTO } from "../../IUserDTOs/ICreateUserDTO";
-import { CreateUserService } from "../../services/UserCreateService";
+import { ICreatePatientDTO } from "../../IPatientDTOs/ICreatePatientDTO";
+import { CreatePatientService } from "../../services/PatientCreateService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
-import { User } from "../../../../entities/User";
+import { Patient } from "../../../../entities/Patients";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 
-class CreateUserController {
+class CreatePatientController {
     
     constructor(
-        private createUser: CreateUserService
+        private createPatient: CreatePatientService
     ) {};
 
-    async handle(req: IRequest<ICreateUserDTO>, res: IResponse<IResponseError | IResponseSucess<Omit<User, 'password'>>>) {
+    async handle(req: IRequest<ICreatePatientDTO>, res: IResponse<IResponseError | IResponseSucess<Patient>>) {
 
         try {
             
-            const { name, email, password } = req.body;
+            const { name, email, age, sex } = req.body;
 
-            const result = await this.createUser.execute({ name, email, password });
+            const result = await this.createPatient.execute({ name, email, age, sex });
 
             if (result.isException()) {
 
@@ -36,7 +36,7 @@ class CreateUserController {
                 const { 
                     message, 
                     statusCode,
-                    value: { id, name, email }
+                    value: { id, name, email, age, sex }
                 } = result.sucess;
 
                 return res.status(statusCode).json({ 
@@ -45,7 +45,9 @@ class CreateUserController {
                     value: {
                         id: id as string, 
                         name,  
-                        email
+                        email,
+                        age, 
+                        sex
                     }
                 });
             };
@@ -58,4 +60,4 @@ class CreateUserController {
 
 };
 
-export { CreateUserController };
+export { CreatePatientController };

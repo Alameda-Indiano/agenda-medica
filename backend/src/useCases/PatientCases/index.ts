@@ -1,22 +1,22 @@
-import { UsersRepositoryInDatabase } from "../../repositories/Users/in-database/UsersRepositoryInDatabase";
-import { IUserRepository } from "../../repositories/Users/IUsersRepositories";
-import { CreateUserController } from "./controllers/UserCreateController";
-import { CreateUserService } from "./services/UserCreateService";
+import { PatientRepositoryInDatabase } from "../../repositories/Patients/in-database/PatientsRepositoryInDatabase";
+import { IPatientRepository } from "../../repositories/Patients/IPatientsRepositories";
+import { CreatePatientController } from "./controllers/PatientCreateController";
+import { CreatePatientService } from "./services/PatientCreateService";
 
-class UserModule {
+class PatientModule {
 
-    private userRepository: IUserRepository;
+    private patientRepository: IPatientRepository;
 
     constructor() {
-        this.userRepository = new UsersRepositoryInDatabase();
+        this.patientRepository = new PatientRepositoryInDatabase();
     };
 
     create() {
-        const createUser = new CreateUserService(this.userRepository);
-        const createUserController = new CreateUserController(createUser);
-        return createUserController;
+        const createPatient = new CreatePatientService(this.patientRepository);
+        const createPatientController = new CreatePatientController(createPatient);
+        return createPatientController;
     };
 
 };
 
-export const UserFactory = new UserModule();
+export const PatientFactory = new PatientModule();
