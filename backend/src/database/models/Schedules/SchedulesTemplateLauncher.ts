@@ -58,7 +58,6 @@ const SchedulesTemplateLauncher: ITemplateLauncher = {
         SchedulesModel.belongsTo(models.patients, {
             foreignKey: 'patient_id',
             onDelete: 'CASCADE',
-            onUpdate: 'CASCADE'
         });
         SchedulesModel.belongsTo(models.doctors, {
             foreignKey: 'doctor_id',

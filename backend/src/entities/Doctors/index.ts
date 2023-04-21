@@ -10,12 +10,12 @@ export interface IDataDoctor {
 
 class Doctor {
     
-    public readonly id?: string;
+    public readonly id?: number;
 
     public declare name: Name;
     public declare email: Email;
 
-    private constructor(props: Omit<Doctor, 'id'>, id?: string) {
+    private constructor(props: Omit<Doctor, 'id'>, id?: number) {
         return Object.assign(this, props);
     };
 

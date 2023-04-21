@@ -12,13 +12,13 @@ export interface IDataUser {
 
 class User {
     
-    public readonly id?: string;
+    public readonly id?: number;
 
     public declare name: Name;
     public declare email: Email;
     public declare password: Password;
 
-    private constructor(props: Omit<User, 'id'>, id?: string) {
+    private constructor(props: Omit<User, 'id'>, id?: number) {
         return Object.assign(this, props);
     };
 

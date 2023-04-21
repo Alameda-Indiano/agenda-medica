@@ -1,22 +1,22 @@
-import { UsersRepositoryInDatabase } from "../../repositories/Users/in-database/UsersRepositoryInDatabase";
-import { IUserRepository } from "../../repositories/Users/IUsersRepositories";
-import { CreateUserController } from "./controllers/UserCreateController";
-import { CreateUserService } from "./services/UserCreateService";
+import { ScheduleRepositoryInDatabase } from "../../repositories/Schedules/in-database/SchedulesRepositoryInDatabase";
+import { IScheduleRepository } from "../../repositories/Schedules/ISchedulesRepositories";
+import { CreateScheduleController } from "./controllers/ScheduleCreateController";
+import { CreateScheduleService } from "./services/ScheduleCreateService";
 
-class UserModule {
+class ScheduleModule {
 
-    private userRepository: IUserRepository;
+    private scheduleRepository: IScheduleRepository;
 
     constructor() {
-        this.userRepository = new UsersRepositoryInDatabase();
+        this.scheduleRepository = new ScheduleRepositoryInDatabase();
     };
 
     create() {
-        const createUser = new CreateUserService(this.userRepository);
-        const createUserController = new CreateUserController(createUser);
-        return createUserController;
+        const createSchedule = new CreateScheduleService(this.scheduleRepository);
+        const createScheduleController = new CreateScheduleController(createSchedule);
+        return createScheduleController;
     };
 
 };
 
-export const UserFactory = new UserModule();
+export const ScheduleFactory = new ScheduleModule();

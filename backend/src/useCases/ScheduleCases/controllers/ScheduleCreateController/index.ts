@@ -1,25 +1,25 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ICreateUserDTO } from "../../IUserDTOs/ICreateUserDTO";
-import { CreateUserService } from "../../services/UserCreateService";
+import { ICreateScheduleDTO } from "../../IScheduleDTOs/IScheduleUserDTO";
+import { CreateScheduleService } from "../../services/ScheduleCreateService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
-import { User } from "../../../../entities/User";
+import { Schedule } from "../../../../entities/Schedules";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 
-class CreateUserController {
+class CreateScheduleController {
     
     constructor(
-        private createUser: CreateUserService
+        private createSchedule: CreateScheduleService
     ) {};
 
-    async handle(req: IRequest<ICreateUserDTO>, res: IResponse<IResponseError | IResponseSucess<Omit<User, 'password'>>>) {
+    async handle(req: IRequest<ICreateScheduleDTO>, res: IResponse<IResponseError | IResponseSucess<Schedule>>) {
 
         try {
             
-            const { name, email, password } = req.body;
+            const { name, status, doctor_id, patient_id, schedule_date } = req.body;
 
-            const result = await this.createUser.execute({ name, email, password });
+            const result = await this.createSchedule.execute({ name, status, doctor_id, patient_id, schedule_date });
 
             if (result.isException()) {
 
@@ -36,7 +36,7 @@ class CreateUserController {
                 const { 
                     message, 
                     statusCode,
-                    value: { id, name, email }
+                    value: { id, name, doctor_id, patient_id, schedule_date, status }
                 } = result.sucess;
 
                 return res.status(statusCode).json({ 
@@ -45,7 +45,10 @@ class CreateUserController {
                     value: {
                         id: id as string, 
                         name,  
-                        email
+                        doctor_id,
+                        patient_id,
+                        schedule_date,
+                        status
                     }
                 });
             };
@@ -58,4 +61,4 @@ class CreateUserController {
 
 };
 
-export { CreateUserController };
+export { CreateScheduleController };

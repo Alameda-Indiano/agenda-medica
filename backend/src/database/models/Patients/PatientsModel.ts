@@ -14,7 +14,7 @@ import { SchedulesModel } from '../Schedules/SchedulesModel';
 
 class PatientsModel extends Model<InferAttributes<PatientsModel>, InferCreationAttributes<PatientsModel>> {
 
-    declare id?: CreationOptional<string>;
+    declare id?: CreationOptional<number>;
     declare name: Name | string;
     declare email: Email | string;
     declare age: Age | Date;

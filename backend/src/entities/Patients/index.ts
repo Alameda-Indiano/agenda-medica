@@ -14,14 +14,14 @@ export interface IDataPatient {
 
 class Patient {
     
-    public readonly id?: string;
+    public readonly id?: number;
 
     public declare name: Name;
     public declare email: Email;
     public declare age: Age;
     public declare sex: Sex;
 
-    private constructor(props: Omit<Patient, 'id'>, id?: string) {
+    private constructor(props: Omit<Patient, 'id'>, id?: number) {
         return Object.assign(this, props);
     };
 

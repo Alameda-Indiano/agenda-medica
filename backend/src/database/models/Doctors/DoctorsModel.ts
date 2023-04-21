@@ -12,7 +12,7 @@ import { SchedulesModel } from '../Schedules/SchedulesModel';
 
 class DoctorsModel extends Model<InferAttributes<DoctorsModel>, InferCreationAttributes<DoctorsModel>> {
 
-    declare id?: CreationOptional<string>;
+    declare id?: CreationOptional<number>;
     declare name: Name | string;
     declare email: Email | string;
 
