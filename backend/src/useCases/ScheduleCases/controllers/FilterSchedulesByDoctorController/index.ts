@@ -1,25 +1,24 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ICreateScheduleDTO } from "../../IScheduleDTOs/ICreateScheduleDTO";
-import { CreateScheduleService } from "../../services/ScheduleCreateService";
+import { SchedulesByPeriodService } from "../../services/SchedulesByPeriodService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
-import { Schedule } from "../../../../entities/Schedules";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
+import { ISchedulesByPeriodDTO, ISchedulesByPeriodParams } from "../../IScheduleDTOs/ISchedulesByPeriodDTO";
 
-class CreateScheduleController {
+class FilterSchedulesByPeriodController {
     
     constructor(
-        private createSchedule: CreateScheduleService
+        private schedulesByPeriodService: SchedulesByPeriodService
     ) {};
 
-    async handle(req: IRequest<ICreateScheduleDTO, any>, res: IResponse<IResponseError | IResponseSucess<Schedule>>) {
+    async handle(req: IRequest<null, ISchedulesByPeriodParams>, res: IResponse<IResponseError | IResponseSucess<ISchedulesByPeriodDTO>>) {
 
         try {
-            
-            const { name, status, doctor_id, patient_id, schedule_date } = req.body;
 
-            const result = await this.createSchedule.execute({ name, status, doctor_id, patient_id, schedule_date });
+            const { period } = req.params;
+
+            const result = await this.schedulesByPeriodService.execute(period);
 
             if (result.isException()) {
 
@@ -36,19 +35,15 @@ class CreateScheduleController {
                 const { 
                     message, 
                     statusCode,
-                    value: { id, name, doctor_id, patient_id, schedule_date, status }
+                    value: { schedules, total_schedules }
                 } = result.sucess;
 
                 return res.status(statusCode).json({ 
                     message,
                     statusCode,
                     value: {
-                        id: id as number, 
-                        name,  
-                        doctor_id,
-                        patient_id,
-                        schedule_date,
-                        status
+                        schedules, 
+                        total_schedules
                     }
                 });
             };
@@ -61,4 +56,4 @@ class CreateScheduleController {
 
 };
 
-export { CreateScheduleController };
+export { FilterSchedulesByPeriodController };

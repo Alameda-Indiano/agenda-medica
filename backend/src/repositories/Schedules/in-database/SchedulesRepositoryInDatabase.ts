@@ -30,6 +30,14 @@ class ScheduleRepositoryInDatabase implements IScheduleRepository {
         return schedules;
     };
 
+    async ofTheStatus(filterStatus: string): Promise<Array<Schedule>> {
+
+        const schedules = await SchedulesModel.findAll({ where: { status: filterStatus }});
+
+        //@ts-ignore
+        return schedules;
+    };
+
 };
 
 export { ScheduleRepositoryInDatabase };

@@ -25,24 +25,27 @@ class SchedulesByPeriodService {
             case 'Today':
 
                 this.dateOfThePeriod = {
-                    [Op.gte]: new Date(new Date().setHours(0, 0, 0, 0)),
-                    [Op.lte]: new Date(new Date().setHours(23, 59, 59, 0))
+                    [Op.between]: [new Date(new Date().setHours(0, 0, 0, 0)), new Date(new Date().setHours(23, 59, 59, 0))]
                 };
                 break;
             
             case 'Week':
 
                 this.dateOfThePeriod = {
-                    [Op.gte]: new Date(new Date().setHours(0, 0, 0, 0)),
-                    [Op.lte]: new Date(new Date(new Date(new Date().setDate(new Date().getDate() + 7))).setHours(0, 0, 0, 0))
+                    [Op.between]: [
+                        new Date(new Date().setHours(0, 0, 0, 0)), 
+                        new Date(new Date(new Date(new Date().setDate(new Date().getDate() + 7))).setHours(0, 0, 0, 0))
+                    ]
                 };
                 break;
             
             case 'Month':
 
                 this.dateOfThePeriod = {
-                    [Op.gte]: new Date(new Date().setHours(0, 0, 0, 0)),
-                    [Op.lte]: new Date(new Date(new Date(new Date().setDate(new Date().getDate() + 30))).setHours(0, 0, 0, 0))
+                    [Op.between]: [
+                        new Date(new Date().setHours(0, 0, 0, 0)),                     
+                        new Date(new Date(new Date(new Date().setDate(new Date().getDate() + 30))).setHours(0, 0, 0, 0))
+                    ]
                 };
                 break;
 

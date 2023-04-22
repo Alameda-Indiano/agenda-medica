@@ -7,6 +7,9 @@ import { CreateScheduleController } from "./controllers/ScheduleCreateController
 import { SchedulesByPeriodService } from "./services/SchedulesByPeriodService";
 import { FilterSchedulesByPeriodController } from "./controllers/FilterSchedulesByPeriodController";
 
+import { SchedulesByStatusService } from "./services/SchedulesByStatusService";
+import { FilterSchedulesByStatusController } from "./controllers/FilterSchedulesByStatusController";
+
 class ScheduleModule {
 
     private scheduleRepository: IScheduleRepository;
@@ -25,6 +28,12 @@ class ScheduleModule {
         const schedulesByPeriodService = new SchedulesByPeriodService(this.scheduleRepository);
         const filterSchedulesByPeriodController = new FilterSchedulesByPeriodController(schedulesByPeriodService);
         return filterSchedulesByPeriodController;
+    };
+
+    filterStatus() {
+        const schedulesByStatusService = new SchedulesByStatusService(this.scheduleRepository);
+        const filterSchedulesByStatusController = new FilterSchedulesByStatusController(schedulesByStatusService);
+        return filterSchedulesByStatusController;
     };
 
 };
