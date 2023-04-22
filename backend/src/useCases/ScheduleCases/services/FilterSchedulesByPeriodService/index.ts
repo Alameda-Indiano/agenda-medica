@@ -6,18 +6,18 @@ import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSuc
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 import { PeriodParamsValue } from '../../IScheduleDTOs/ISchedulesByPeriodDTO';
 import { IDefaultReturnDTO } from '../../IScheduleDTOs/IDefaultReturnDTO';
-import { PeriodFilterGenerator } from '../../../../shared/Services/PeriodFilterGenerator';
+import { PeriodFilterGeneratorService } from '../../../../shared/Services/PeriodFilterGeneratorService';
 
 class FilterSchedulesByPeriodService {
 
     constructor(
         private schedulesRepository: IScheduleRepository,
-        private periodFilterGenerator: PeriodFilterGenerator
+        private periodFilterGeneratorService: PeriodFilterGeneratorService
     ) {};
 
     async execute(period: PeriodParamsValue): Promise<Either<ParametersError, IResponseSucess<IDefaultReturnDTO>>> {
 
-        const result = this.periodFilterGenerator.execute(period)
+        const result = this.periodFilterGeneratorService.execute(period)
 
         if (result.isException()) {
             const { statusCode, message } = result.exception;

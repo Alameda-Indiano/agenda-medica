@@ -1,6 +1,6 @@
 import { ScheduleRepositoryInDatabase } from "../../repositories/Schedules/in-database/SchedulesRepositoryInDatabase";
 import { IScheduleRepository } from "../../repositories/Schedules/ISchedulesRepositories";
-import { PeriodFilterGenerator } from "../../shared/Services/PeriodFilterGenerator";
+import { PeriodFilterGeneratorService } from "../../shared/Services/PeriodFilterGeneratorService";
 
 import { CreateScheduleService } from "./services/ScheduleCreateService";
 import { CreateScheduleController } from "./controllers/ScheduleCreateController";
@@ -17,11 +17,11 @@ import { FilterSchedulesByDoctorAndPeriodController } from "./controllers/Filter
 class ScheduleModule {
 
     private scheduleRepository: IScheduleRepository;
-    private periodFilterGenerator: PeriodFilterGenerator
+    private periodFilterGeneratorService: PeriodFilterGeneratorService
 
     constructor() {
         this.scheduleRepository = new ScheduleRepositoryInDatabase();
-        this.periodFilterGenerator = new PeriodFilterGenerator();
+        this.periodFilterGeneratorService = new PeriodFilterGeneratorService();
     };
 
     create() {
@@ -31,7 +31,7 @@ class ScheduleModule {
     };
 
     filterByPeriod() {
-        const filterSchedulesByPeriodService = new FilterSchedulesByPeriodService(this.scheduleRepository, this.periodFilterGenerator);
+        const filterSchedulesByPeriodService = new FilterSchedulesByPeriodService(this.scheduleRepository, this.periodFilterGeneratorService);
         const filterSchedulesByPeriodController = new FilterSchedulesByPeriodController(filterSchedulesByPeriodService);
         return filterSchedulesByPeriodController;
     };
@@ -43,7 +43,7 @@ class ScheduleModule {
     };
 
     filterDoctorByPediod() {
-        const filterSchedulesByDoctorAndPeriodService = new FilterSchedulesByDoctorAndPeriodService(this.scheduleRepository, this.periodFilterGenerator);
+        const filterSchedulesByDoctorAndPeriodService = new FilterSchedulesByDoctorAndPeriodService(this.scheduleRepository, this.periodFilterGeneratorService);
         const filterSchedulesByDoctorAndPeriodController = new FilterSchedulesByDoctorAndPeriodController(filterSchedulesByDoctorAndPeriodService);
         return filterSchedulesByDoctorAndPeriodController;
     };

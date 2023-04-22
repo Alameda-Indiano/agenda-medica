@@ -1,25 +1,23 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ICreateUserDTO } from "../../IUserDTOs/ICreateUserDTO";
-import { CreateUserService } from "../../services/UserCreateService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
-import { User } from "../../../../entities/User";
+import { Doctor } from "../../../../entities/Doctors";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 
-class CreateUserController {
+class GeneratorJwtController {
     
     constructor(
-        private createUser: CreateUserService
+        private createDoctor: CreateDoctorService
     ) {};
 
-    async handle(req: IRequest<ICreateUserDTO, any>, res: IResponse<IResponseError | IResponseSucess<Omit<User, 'password'>>>) {
+    async handle(req: IRequest<ICreateDoctorDTO, null>, res: IResponse<IResponseError | IResponseSucess<Doctor>>) {
 
         try {
             
-            const { name, email, password } = req.body;
+            const { name, email } = req.body;
 
-            const result = await this.createUser.execute({ name, email, password });
+            const result = await this.createDoctor.execute({ name, email });
 
             if (result.isException()) {
 
@@ -58,4 +56,4 @@ class CreateUserController {
 
 };
 
-export { CreateUserController };
+export { GeneratorJwtController };

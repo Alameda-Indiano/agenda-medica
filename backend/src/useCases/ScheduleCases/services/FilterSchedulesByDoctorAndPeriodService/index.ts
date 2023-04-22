@@ -6,13 +6,13 @@ import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSuc
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 import { PeriodParamsValue } from '../../IScheduleDTOs/ISchedulesByPeriodDTO';
 import { IDefaultReturnDTO } from '../../IScheduleDTOs/IDefaultReturnDTO';
-import { PeriodFilterGenerator } from '../../../../shared/Services/PeriodFilterGenerator';
+import { PeriodFilterGeneratorService } from '../../../../shared/Services/PeriodFilterGeneratorService';
 
 class FilterSchedulesByDoctorAndPeriodService {
 
     constructor(
         private schedulesRepository: IScheduleRepository,
-        private periodFilterGenerator: PeriodFilterGenerator
+        private periodFilterGeneratorService: PeriodFilterGeneratorService
     ) {};
 
     async execute(FilterByDoctorAndPeriod: string): Promise<Either<ParametersError, IResponseSucess<IDefaultReturnDTO>>> {
@@ -21,7 +21,7 @@ class FilterSchedulesByDoctorAndPeriodService {
 
         if (!doctorName) return error(new ParametersError('It is necessary to inform the name of the doctor you wish to research.', statuscode.BAD_REQUEST));
 
-        const result = this.periodFilterGenerator.execute(period as PeriodParamsValue);
+        const result = this.periodFilterGeneratorService.execute(period as PeriodParamsValue);
 
         if (result.isException()) {
             const { statusCode, message } = result.exception;

@@ -9,9 +9,9 @@ class UsersRepositoryInDatabase implements IUserRepository {
         return user as User;
     };
 
-    async exists(email: string): Promise<boolean> {
+    async exists(email: string): Promise<UsersModel | null> {
         const user = await UsersModel.findOne({ where: { email } });
-        return !!user;
+        return user;
     };
 
 };

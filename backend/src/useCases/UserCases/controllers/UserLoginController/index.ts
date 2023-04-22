@@ -1,25 +1,24 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ICreateUserDTO } from "../../IUserDTOs/ICreateUserDTO";
-import { CreateUserService } from "../../services/UserCreateService";
+import { ILoginUserDTO, IResponseLoginUser } from "../../IUserDTOs/ILoginUserDTO";
+import { UserLoginService } from "../../services/UserLoginService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
-import { User } from "../../../../entities/User";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 
-class CreateUserController {
+class UserLoginController {
     
     constructor(
-        private createUser: CreateUserService
+        private userLoginService: UserLoginService
     ) {};
 
-    async handle(req: IRequest<ICreateUserDTO, any>, res: IResponse<IResponseError | IResponseSucess<Omit<User, 'password'>>>) {
+    async handle(req: IRequest<ILoginUserDTO, any>, res: IResponse<IResponseError | IResponseSucess<IResponseLoginUser>>) {
 
         try {
             
-            const { name, email, password } = req.body;
+            const { email, password } = req.body;
 
-            const result = await this.createUser.execute({ name, email, password });
+            const result = await this.userLoginService.execute({ email, password });
 
             if (result.isException()) {
 
@@ -36,16 +35,14 @@ class CreateUserController {
                 const { 
                     message, 
                     statusCode,
-                    value: { id, name, email }
+                    value: { jwt }
                 } = result.sucess;
 
                 return res.status(statusCode).json({ 
                     message,
                     statusCode,
                     value: {
-                        id: id as number, 
-                        name,  
-                        email
+                        jwt
                     }
                 });
             };
@@ -58,4 +55,4 @@ class CreateUserController {
 
 };
 
-export { CreateUserController };
+export { UserLoginController };

@@ -6,7 +6,7 @@ import { Either, error, sucess } from "../ErrorHandling/Either";
 import { ParametersError } from "../ErrorHandling/ParametersError";
 import { statuscode } from "../interfaces/StatusCode";
 
-class PeriodFilterGenerator {
+class PeriodFilterGeneratorService {
 
     private dateOfThePeriod: WhereAttributeHashValue<ScheduleDate | Date>;
     
@@ -52,5 +52,5 @@ class PeriodFilterGenerator {
 };
 
 export {  
-    PeriodFilterGenerator
+    PeriodFilterGeneratorService
 };
