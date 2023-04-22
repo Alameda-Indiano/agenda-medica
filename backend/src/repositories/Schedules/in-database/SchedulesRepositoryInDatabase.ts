@@ -1,4 +1,6 @@
+import { Op } from "sequelize";
 import { WhereAttributeHashValue } from "sequelize";
+import { DoctorsModel } from "../../../database/models/Doctors/DoctorsModel";
 import { SchedulesModel } from "../../../database/models/Schedules/SchedulesModel";
 import { Schedule } from "../../../entities/Schedules";
 import { ScheduleDate } from "../../../entities/Schedules/validator/scheduleDate";
@@ -10,6 +12,7 @@ class ScheduleRepositoryInDatabase implements IScheduleRepository {
 
         const schedule = await SchedulesModel.create({ name, status, schedule_date, patient_id, doctor_id });
         return schedule as Schedule;
+
     };
 
     async exists(schedule_date: Date, patient_id: number): Promise<boolean> {
@@ -18,9 +21,12 @@ class ScheduleRepositoryInDatabase implements IScheduleRepository {
         return !!schedules.find((schedule) => schedule.status !== "Finalizado" && schedule.status !== "Cancelado");
     };
 
-    async ofThePeriod(filterPeriod: WhereAttributeHashValue<ScheduleDate | Date>): Promise<Array<Schedule>> {
+    async filterByPeriod(filterPeriod: WhereAttributeHashValue<ScheduleDate | Date>): Promise<Array<Schedule>> {
 
         const schedules = await SchedulesModel.findAll({ 
+            include: {
+                all: true
+            },
             where: { 
                 schedule_date: filterPeriod
             }
@@ -30,12 +36,40 @@ class ScheduleRepositoryInDatabase implements IScheduleRepository {
         return schedules;
     };
 
-    async ofTheStatus(filterStatus: string): Promise<Array<Schedule>> {
+    async filterByStatus(filterStatus: string): Promise<Array<Schedule>> {
 
-        const schedules = await SchedulesModel.findAll({ where: { status: filterStatus }});
+        const schedules = await SchedulesModel.findAll({
+            include: {
+                all: true
+            }, 
+            where: { 
+                status: filterStatus 
+            }
+        });
 
         //@ts-ignore
         return schedules;
+    };
+
+    async filterByDoctorAndPeriod(doctorName: string, period: any): Promise<Schedule[]> {
+        
+        const schedules = await SchedulesModel.findAll({ 
+            include: {
+                model: DoctorsModel,
+                where: {
+                    name: {
+                        [Op.startsWith]: doctorName
+                    }
+                }
+            },
+            where: { 
+                schedule_date: period
+            }
+        });
+
+        //@ts-ignore
+        return schedules;
+
     };
 
 };

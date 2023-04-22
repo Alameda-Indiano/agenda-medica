@@ -5,55 +5,28 @@ import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSuce
 import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 import { PeriodParamsValue } from '../../IScheduleDTOs/ISchedulesByPeriodDTO';
-import { Op, WhereAttributeHashValue } from 'sequelize';
-import { ScheduleDate } from '../../../../entities/Schedules/validator/scheduleDate';
 import { IDefaultReturnDTO } from '../../IScheduleDTOs/IDefaultReturnDTO';
+import { PeriodFilterGenerator } from '../../../../shared/Services/PeriodFilterGenerator';
 
 class FilterSchedulesByPeriodService {
 
-    private dateOfThePeriod: WhereAttributeHashValue<ScheduleDate | Date>;
-
     constructor(
-        private schedulesRepository: IScheduleRepository
-    ) {
-        this.dateOfThePeriod = undefined;
-    };
+        private schedulesRepository: IScheduleRepository,
+        private periodFilterGenerator: PeriodFilterGenerator
+    ) {};
 
     async execute(period: PeriodParamsValue): Promise<Either<ParametersError, IResponseSucess<IDefaultReturnDTO>>> {
 
-        switch (period) {
-            
-            case 'Today':
+        const result = this.periodFilterGenerator.execute(period)
 
-                this.dateOfThePeriod = {
-                    [Op.between]: [new Date(new Date().setHours(0, 0, 0, 0)), new Date(new Date().setHours(23, 59, 59, 0))]
-                };
-                break;
-            
-            case 'Week':
-
-                this.dateOfThePeriod = {
-                    [Op.between]: [
-                        new Date(new Date().setHours(0, 0, 0, 0)), 
-                        new Date(new Date(new Date(new Date().setDate(new Date().getDate() + 7))).setHours(0, 0, 0, 0))
-                    ]
-                };
-                break;
-            
-            case 'Month':
-
-                this.dateOfThePeriod = {
-                    [Op.between]: [
-                        new Date(new Date().setHours(0, 0, 0, 0)),                     
-                        new Date(new Date(new Date(new Date().setDate(new Date().getDate() + 30))).setHours(0, 0, 0, 0))
-                    ]
-                };
-                break;
-
-            default: return error(new ParametersError('The period requested in the filter does not exist!', statuscode.NOT_FOUND));
+        if (result.isException()) {
+            const { statusCode, message } = result.exception;
+            return error(
+                new ParametersError(message, statusCode)
+            );
         };
 
-        const schedules = await this.schedulesRepository.ofThePeriod(this.dateOfThePeriod);
+        const schedules = await this.schedulesRepository.filterByPeriod(result.sucess);
 
         if (schedules.length === 0) {
             return sucess(

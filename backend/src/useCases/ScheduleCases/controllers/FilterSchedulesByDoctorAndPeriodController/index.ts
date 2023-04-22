@@ -1,25 +1,25 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { FilterSchedulesByPeriodService } from "../../services/FilterSchedulesByPeriodService";
+import { FilterSchedulesByDoctorAndPeriodService } from "../../services/FilterSchedulesByDoctorAndPeriodService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 import { IDoctorByPeriodParams } from "../../IScheduleDTOs/ISchedulesDoctorByPeriodDTO";
 import { IDefaultReturnDTO } from '../../IScheduleDTOs/IDefaultReturnDTO';
 
-class FilterSchedulesByPeriodController {
+class FilterSchedulesByDoctorAndPeriodController {
     
     constructor(
-        private filterSchedulesByPeriodService: FilterSchedulesByPeriodService
+        private filterSchedulesByDoctorAndPeriodService: FilterSchedulesByDoctorAndPeriodService
     ) {};
 
     async handle(req: IRequest<null, IDoctorByPeriodParams>, res: IResponse<IResponseError | IResponseSucess<IDefaultReturnDTO>>) {
 
         try {
 
-            const { period } = req.params;
+            const { doctorAndPeriod } = req.params;
 
-            const result = await this.filterSchedulesByPeriodService.execute(period);
+            const result = await this.filterSchedulesByDoctorAndPeriodService.execute(doctorAndPeriod);
 
             if (result.isException()) {
 
@@ -57,4 +57,4 @@ class FilterSchedulesByPeriodController {
 
 };
 
-export { FilterSchedulesByPeriodController };
+export { FilterSchedulesByDoctorAndPeriodController };

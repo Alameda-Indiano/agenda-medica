@@ -1,5 +1,6 @@
 import { ScheduleRepositoryInDatabase } from "../../repositories/Schedules/in-database/SchedulesRepositoryInDatabase";
 import { IScheduleRepository } from "../../repositories/Schedules/ISchedulesRepositories";
+import { PeriodFilterGenerator } from "../../shared/Services/PeriodFilterGenerator";
 
 import { CreateScheduleService } from "./services/ScheduleCreateService";
 import { CreateScheduleController } from "./controllers/ScheduleCreateController";
@@ -10,12 +11,17 @@ import { FilterSchedulesByPeriodController } from "./controllers/FilterSchedules
 import { FilterSchedulesByStatusService } from "./services/FilterSchedulesByStatusService";
 import { FilterSchedulesByStatusController } from "./controllers/FilterSchedulesByStatusController";
 
+import { FilterSchedulesByDoctorAndPeriodService } from "./services/FilterSchedulesByDoctorAndPeriodService";
+import { FilterSchedulesByDoctorAndPeriodController } from "./controllers/FilterSchedulesByDoctorAndPeriodController";
+
 class ScheduleModule {
 
     private scheduleRepository: IScheduleRepository;
+    private periodFilterGenerator: PeriodFilterGenerator
 
     constructor() {
         this.scheduleRepository = new ScheduleRepositoryInDatabase();
+        this.periodFilterGenerator = new PeriodFilterGenerator();
     };
 
     create() {
@@ -24,8 +30,8 @@ class ScheduleModule {
         return createScheduleController;
     };
 
-    filterOfTheDay() {
-        const filterSchedulesByPeriodService = new FilterSchedulesByPeriodService(this.scheduleRepository);
+    filterByPeriod() {
+        const filterSchedulesByPeriodService = new FilterSchedulesByPeriodService(this.scheduleRepository, this.periodFilterGenerator);
         const filterSchedulesByPeriodController = new FilterSchedulesByPeriodController(filterSchedulesByPeriodService);
         return filterSchedulesByPeriodController;
     };
@@ -34,6 +40,12 @@ class ScheduleModule {
         const filterSchedulesByStatusService = new FilterSchedulesByStatusService(this.scheduleRepository);
         const filterSchedulesByStatusController = new FilterSchedulesByStatusController(filterSchedulesByStatusService);
         return filterSchedulesByStatusController;
+    };
+
+    filterDoctorByPediod() {
+        const filterSchedulesByDoctorAndPeriodService = new FilterSchedulesByDoctorAndPeriodService(this.scheduleRepository, this.periodFilterGenerator);
+        const filterSchedulesByDoctorAndPeriodController = new FilterSchedulesByDoctorAndPeriodController(filterSchedulesByDoctorAndPeriodService);
+        return filterSchedulesByDoctorAndPeriodController;
     };
 
 };

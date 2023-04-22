@@ -15,7 +15,7 @@ class FilterSchedulesByStatusService {
 
     async execute(status: StatusParamsValue): Promise<Either<ParametersError, IResponseSucess<IDefaultReturnDTO>>> {
 
-        const schedules = await this.schedulesRepository.ofTheStatus(status);
+        const schedules = await this.schedulesRepository.filterByStatus(status);
 
         if (schedules.length === 0) {
             return sucess(
