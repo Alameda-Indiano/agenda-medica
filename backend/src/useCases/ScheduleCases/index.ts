@@ -4,10 +4,10 @@ import { IScheduleRepository } from "../../repositories/Schedules/ISchedulesRepo
 import { CreateScheduleService } from "./services/ScheduleCreateService";
 import { CreateScheduleController } from "./controllers/ScheduleCreateController";
 
-import { SchedulesByPeriodService } from "./services/SchedulesByPeriodService";
+import { FilterSchedulesByPeriodService } from "./services/FilterSchedulesByPeriodService";
 import { FilterSchedulesByPeriodController } from "./controllers/FilterSchedulesByPeriodController";
 
-import { SchedulesByStatusService } from "./services/SchedulesByStatusService";
+import { FilterSchedulesByStatusService } from "./services/FilterSchedulesByStatusService";
 import { FilterSchedulesByStatusController } from "./controllers/FilterSchedulesByStatusController";
 
 class ScheduleModule {
@@ -25,14 +25,14 @@ class ScheduleModule {
     };
 
     filterOfTheDay() {
-        const schedulesByPeriodService = new SchedulesByPeriodService(this.scheduleRepository);
-        const filterSchedulesByPeriodController = new FilterSchedulesByPeriodController(schedulesByPeriodService);
+        const filterSchedulesByPeriodService = new FilterSchedulesByPeriodService(this.scheduleRepository);
+        const filterSchedulesByPeriodController = new FilterSchedulesByPeriodController(filterSchedulesByPeriodService);
         return filterSchedulesByPeriodController;
     };
 
     filterStatus() {
-        const schedulesByStatusService = new SchedulesByStatusService(this.scheduleRepository);
-        const filterSchedulesByStatusController = new FilterSchedulesByStatusController(schedulesByStatusService);
+        const filterSchedulesByStatusService = new FilterSchedulesByStatusService(this.scheduleRepository);
+        const filterSchedulesByStatusController = new FilterSchedulesByStatusController(filterSchedulesByStatusService);
         return filterSchedulesByStatusController;
     };
 

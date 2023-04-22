@@ -1,24 +1,25 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { SchedulesByStatusService } from "../../services/SchedulesByStatusService";
+import { FilterSchedulesByStatusService } from "../../services/FilterSchedulesByStatusService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
-import { ISchedulesByStatusDTO, ISchedulesByStatusParams } from "../../IScheduleDTOs/ISchedulesByStatusDTO";
+import { ISchedulesByStatusParams } from "../../IScheduleDTOs/ISchedulesByStatusDTO";
+import { IDefaultReturnDTO } from "../../IScheduleDTOs/IDefaultReturnDTO";
 
 class FilterSchedulesByStatusController {
     
     constructor(
-        private schedulesByStatusService: SchedulesByStatusService
+        private filterSchedulesByStatusService: FilterSchedulesByStatusService
     ) {};
 
-    async handle(req: IRequest<null, ISchedulesByStatusParams>, res: IResponse<IResponseError | IResponseSucess<ISchedulesByStatusDTO>>) {
+    async handle(req: IRequest<null, ISchedulesByStatusParams>, res: IResponse<IResponseError | IResponseSucess<IDefaultReturnDTO>>) {
 
         try {
 
             const { status } = req.params;
 
-            const result = await this.schedulesByStatusService.execute(status);
+            const result = await this.filterSchedulesByStatusService.execute(status);
 
             if (result.isException()) {
 

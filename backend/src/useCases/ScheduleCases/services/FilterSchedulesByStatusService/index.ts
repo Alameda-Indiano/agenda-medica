@@ -4,23 +4,22 @@ import { ParametersError } from '../../../../shared/ErrorHandling/ParametersErro
 import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
 import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
-import { ISchedulesByStatusDTO, StatusParamsValue } from '../../IScheduleDTOs/ISchedulesByStatusDTO';
-import { WhereAttributeHashValue } from 'sequelize';
-import { ScheduleDate } from '../../../../entities/Schedules/validator/scheduleDate';
+import { StatusParamsValue } from '../../IScheduleDTOs/ISchedulesByStatusDTO';
+import { IDefaultReturnDTO } from '../../IScheduleDTOs/IDefaultReturnDTO';
 
-class SchedulesByStatusService {
+class FilterSchedulesByStatusService {
 
     constructor(
         private schedulesRepository: IScheduleRepository
     ) {};
 
-    async execute(status: StatusParamsValue): Promise<Either<ParametersError, IResponseSucess<ISchedulesByStatusDTO>>> {
+    async execute(status: StatusParamsValue): Promise<Either<ParametersError, IResponseSucess<IDefaultReturnDTO>>> {
 
         const schedules = await this.schedulesRepository.ofTheStatus(status);
 
         if (schedules.length === 0) {
             return sucess(
-                new ParametersSucess(`Appointments could not be found for the reporting period (${status}).`, 
+                new ParametersSucess(`Could not find schedules with status: (${status}).`, 
                     statuscode.PARTIAL_CONTENT, { 
                         schedules,
                         total_schedules: schedules.length
@@ -40,4 +39,4 @@ class SchedulesByStatusService {
 
 };
 
-export { SchedulesByStatusService };
+export { FilterSchedulesByStatusService };

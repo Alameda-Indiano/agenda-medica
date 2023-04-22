@@ -1,24 +1,25 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { SchedulesByPeriodService } from "../../services/SchedulesByPeriodService";
+import { FilterSchedulesByPeriodService } from "../../services/FilterSchedulesByPeriodService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
-import { ISchedulesByPeriodDTO, ISchedulesByPeriodParams } from "../../IScheduleDTOs/ISchedulesByPeriodDTO";
+import { ISchedulesByPeriodParams } from "../../IScheduleDTOs/ISchedulesByPeriodDTO";
+import { IDefaultReturnDTO } from "../../IScheduleDTOs/IDefaultReturnDTO";
 
 class FilterSchedulesByPeriodController {
     
     constructor(
-        private schedulesByPeriodService: SchedulesByPeriodService
+        private filterSchedulesByPeriodService: FilterSchedulesByPeriodService
     ) {};
 
-    async handle(req: IRequest<null, ISchedulesByPeriodParams>, res: IResponse<IResponseError | IResponseSucess<ISchedulesByPeriodDTO>>) {
+    async handle(req: IRequest<null, ISchedulesByPeriodParams>, res: IResponse<IResponseError | IResponseSucess<IDefaultReturnDTO>>) {
 
         try {
 
             const { period } = req.params;
 
-            const result = await this.schedulesByPeriodService.execute(period);
+            const result = await this.filterSchedulesByPeriodService.execute(period);
 
             if (result.isException()) {
 

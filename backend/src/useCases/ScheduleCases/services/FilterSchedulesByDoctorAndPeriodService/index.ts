@@ -4,11 +4,12 @@ import { ParametersError } from '../../../../shared/ErrorHandling/ParametersErro
 import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
 import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
-import { ISchedulesByPeriodDTO, PeriodParamsValue } from '../../IScheduleDTOs/ISchedulesByPeriodDTO';
+import { PeriodParamsValue } from '../../IScheduleDTOs/ISchedulesByPeriodDTO';
 import { Op, WhereAttributeHashValue } from 'sequelize';
 import { ScheduleDate } from '../../../../entities/Schedules/validator/scheduleDate';
+import { IDefaultReturnDTO } from '../../IScheduleDTOs/IDefaultReturnDTO';
 
-class SchedulesByPeriodService {
+class FilterSchedulesByPeriodService {
 
     private dateOfThePeriod: WhereAttributeHashValue<ScheduleDate | Date>;
 
@@ -18,7 +19,7 @@ class SchedulesByPeriodService {
         this.dateOfThePeriod = undefined;
     };
 
-    async execute(period: PeriodParamsValue): Promise<Either<ParametersError, IResponseSucess<ISchedulesByPeriodDTO>>> {
+    async execute(period: PeriodParamsValue): Promise<Either<ParametersError, IResponseSucess<IDefaultReturnDTO>>> {
 
         switch (period) {
             
@@ -76,4 +77,4 @@ class SchedulesByPeriodService {
 
 };
 
-export { SchedulesByPeriodService };
+export { FilterSchedulesByPeriodService };
