@@ -13,7 +13,7 @@ class CreatePatientController {
         private createPatient: CreatePatientService
     ) {};
 
-    async handle(req: IRequest<ICreatePatientDTO, null>, res: IResponse<IResponseError | IResponseSucess<Patient>>) {
+    async handle(req: IRequest<ICreatePatientDTO, any>, res: IResponse<IResponseError | IResponseSucess<Patient>>) {
 
         try {
             

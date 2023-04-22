@@ -2,6 +2,10 @@ import { Request } from "express";
 
 //@ts-ignore
 export interface IRequest<Body, Params> extends Request {
-    body: Body,
-    params: Params
+    user_id?: number;
+    body: Body;
+    params: Params;
+    headers: {
+        authorization?: string | undefined;
+    }
 };
