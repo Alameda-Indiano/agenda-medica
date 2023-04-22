@@ -17,7 +17,7 @@ class SchedulesModel extends Model<InferAttributes<SchedulesModel>, InferCreatio
     declare id?: CreationOptional<number>;
     declare name: Name | string;
     declare schedule_date: ScheduleDate | Date;
-    declare status: Status | 'Agendado' | 'Em Andamento' | 'Finalizado' | 'Cancelado';
+    declare status: Status | 'Novo Agendamento' | 'Em Andamento' | 'Finalizado' | 'Cancelado';
 
     declare patient_id: number;
     declare doctor_id: number;

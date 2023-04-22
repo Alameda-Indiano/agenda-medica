@@ -1,25 +1,24 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ICreateDoctorDTO } from "../../IDoctorDTOs/ICreateDoctorDTO";
-import { CreateDoctorService } from "../../services/DoctorCreateService";
+import { SchedulesByPeriodService } from "../../services/SchedulesByPeriodService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
-import { Doctor } from "../../../../entities/Doctors";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
+import { ISchedulesByPeriodDTO, ISchedulesByPeriodParams } from "../../IScheduleDTOs/ISchedulesByPeriodDTO";
 
-class CreateDoctorController {
+class FilterSchedulesByPeriodController {
     
     constructor(
-        private createDoctor: CreateDoctorService
+        private schedulesByPeriodService: SchedulesByPeriodService
     ) {};
 
-    async handle(req: IRequest<ICreateDoctorDTO, null>, res: IResponse<IResponseError | IResponseSucess<Doctor>>) {
+    async handle(req: IRequest<null, ISchedulesByPeriodParams>, res: IResponse<IResponseError | IResponseSucess<ISchedulesByPeriodDTO>>) {
 
         try {
-            
-            const { name, email } = req.body;
 
-            const result = await this.createDoctor.execute({ name, email });
+            const { period } = req.params;
+
+            const result = await this.schedulesByPeriodService.execute(period);
 
             if (result.isException()) {
 
@@ -36,16 +35,15 @@ class CreateDoctorController {
                 const { 
                     message, 
                     statusCode,
-                    value: { id, name, email }
+                    value: { schedules, total_schedules }
                 } = result.sucess;
 
                 return res.status(statusCode).json({ 
                     message,
                     statusCode,
                     value: {
-                        id: id as number, 
-                        name,  
-                        email
+                        schedules, 
+                        total_schedules
                     }
                 });
             };
@@ -58,4 +56,4 @@ class CreateDoctorController {
 
 };
 
-export { CreateDoctorController };
+export { FilterSchedulesByPeriodController };

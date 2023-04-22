@@ -1,1 +1,1 @@
-npx sequelize-cli model:generate --name Patients --attributes name:string,email:string,age:date,sex:string
+npx sequelize-cli model:generate --name Patients --attributes name:string,email:string,age:date,sex:enum,status:enum

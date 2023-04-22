@@ -1,8 +1,7 @@
 import { Either, error, sucess } from "../../../../shared/ErrorHandling/Either";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 import { ParametersError } from "../../../../shared/ErrorHandling/ParametersError";
-
-type IStatusSchedule = 'Agendado' | 'Em Andamento' | 'Finalizado' | 'Cancelado';
+import { IStatusSchedule } from "../../interfaces";
 
 class Status {
 
@@ -14,16 +13,15 @@ class Status {
     };
 
     static create(statusSchedule: IStatusSchedule): Either<ParametersError, Status> {
-
-        if (statusSchedule.trim().length === 0) return error(new ParametersError('It is necessary to inform the schedule status', statuscode.BAD_REQUEST))
         
-        else if (
-            statusSchedule !== "Agendado" && 
+        if (
+            !!statusSchedule &&
+            statusSchedule !== "Novo Agendamento" && 
             statusSchedule !== "Em Andamento" && 
             statusSchedule !== "Finalizado" && 
             statusSchedule !== "Cancelado" 
         ) return error(new ParametersError('The reported status is invalid', statuscode.BAD_REQUEST))
-
+        
         else return sucess(new Status(statusSchedule));
 
     };

@@ -1,7 +1,7 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ICreateScheduleDTO } from "../../IScheduleDTOs/IScheduleUserDTO";
+import { ICreateScheduleDTO } from "../../IScheduleDTOs/ICreateScheduleDTO";
 import { CreateScheduleService } from "../../services/ScheduleCreateService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { Schedule } from "../../../../entities/Schedules";
@@ -13,7 +13,7 @@ class CreateScheduleController {
         private createSchedule: CreateScheduleService
     ) {};
 
-    async handle(req: IRequest<ICreateScheduleDTO>, res: IResponse<IResponseError | IResponseSucess<Schedule>>) {
+    async handle(req: IRequest<ICreateScheduleDTO, null>, res: IResponse<IResponseError | IResponseSucess<Schedule>>) {
 
         try {
             
@@ -43,7 +43,7 @@ class CreateScheduleController {
                     message,
                     statusCode,
                     value: {
-                        id: id as string, 
+                        id: id as number, 
                         name,  
                         doctor_id,
                         patient_id,

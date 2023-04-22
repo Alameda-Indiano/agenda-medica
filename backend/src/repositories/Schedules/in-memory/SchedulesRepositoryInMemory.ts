@@ -26,6 +26,18 @@ class SchedulesRepositoryInMemory implements IScheduleRepository {
         return schedule;
     };
 
+    async ofTheDay(): Promise<Array<Schedule>> {
+
+        const schedules = this.schedules.filter(schedule => {
+            if (
+                schedule.schedule_date.value as any >= new Date(new Date().setHours(0, 0, 0, 0)) && 
+                schedule.schedule_date.value as any <= new Date(new Date().setHours(23, 59, 59, 0))
+            ) return schedule;
+        });
+
+        return schedules;
+    };
+
 };
 
 export { SchedulesRepositoryInMemory };

@@ -1,8 +1,7 @@
 import { Request } from "express";
 
-export interface IRequest<T> extends Request {
-    body: T,
-    params: {
-        id?: string
-    }
+//@ts-ignore
+export interface IRequest<Body, Params> extends Request {
+    body: Body,
+    params: Params
 };

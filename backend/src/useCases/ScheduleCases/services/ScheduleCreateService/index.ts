@@ -1,6 +1,6 @@
 import { IScheduleRepository } from '../../../../repositories/Schedules/ISchedulesRepositories';
 import { Schedule } from '../../../../entities/Schedules';
-import { ICreateScheduleDTO } from '../../IScheduleDTOs/IScheduleUserDTO';
+import { ICreateScheduleDTO } from '../../IScheduleDTOs/ICreateScheduleDTO';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
 import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';

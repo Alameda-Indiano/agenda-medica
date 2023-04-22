@@ -4,8 +4,8 @@ import { IPatientRepository } from "../IPatientsRepositories";
 
 class PatientRepositoryInDatabase implements IPatientRepository {
 
-    async create({ name, email, age, sex }: Patient): Promise<Patient> {
-        const patient = await PatientsModel.create({ name, email, age, sex });
+    async create({ name, email, age, sex, status }: Patient): Promise<Patient> {
+        const patient = await PatientsModel.create({ name, email, age, sex, status });
         return patient as Patient;
     };
 

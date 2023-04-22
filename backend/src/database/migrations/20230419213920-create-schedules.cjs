@@ -17,8 +17,8 @@ module.exports = {
         allowNull: false
       },
       status: {
-        type: Sequelize.ENUM('Agendado', 'Em Andamento', 'Finalizado', 'Cancelado'),
-        allowNull: false,
+        type: Sequelize.ENUM('Novo Agendamento', 'Em Andamento', 'Finalizado', 'Cancelado'),
+        defaultValue: 'Novo Agendamento'
       },
       patient_id: {
         type: Sequelize.INTEGER,

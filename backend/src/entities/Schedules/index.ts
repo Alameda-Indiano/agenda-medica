@@ -3,11 +3,12 @@ import { ParametersError } from "../../shared/ErrorHandling/ParametersError";
 import { ScheduleDate } from "./validator/scheduleDate";
 import { Name } from "./validator/name";
 import { Status } from "./validator/status";
+import { IStatusSchedule } from "./interfaces";
 
 export interface IDataSchedule {
     name: string;
     schedule_date: Date;
-    status: 'Agendado' | 'Em Andamento' | 'Finalizado' | 'Cancelado';
+    status: IStatusSchedule;
     patient_id: number;
     doctor_id: number;
 };

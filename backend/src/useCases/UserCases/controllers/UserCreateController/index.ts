@@ -13,7 +13,7 @@ class CreateUserController {
         private createUser: CreateUserService
     ) {};
 
-    async handle(req: IRequest<ICreateUserDTO>, res: IResponse<IResponseError | IResponseSucess<Omit<User, 'password'>>>) {
+    async handle(req: IRequest<ICreateUserDTO, null>, res: IResponse<IResponseError | IResponseSucess<Omit<User, 'password'>>>) {
 
         try {
             
@@ -43,7 +43,7 @@ class CreateUserController {
                     message,
                     statusCode,
                     value: {
-                        id: id as string, 
+                        id: id as number, 
                         name,  
                         email
                     }

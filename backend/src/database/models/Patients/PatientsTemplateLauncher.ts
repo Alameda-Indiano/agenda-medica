@@ -28,6 +28,10 @@ const PatientsTemplateLauncher: ITemplateLauncher = {
             sex: {
                 type: DataTypes.ENUM('Masculino', 'Feminino'),
                 allowNull: false
+            },
+            status: {
+                type: DataTypes.ENUM('Ativo', 'Inativo'),
+                defaultValue: 'Ativo'
             }
         }, {
             sequelize,

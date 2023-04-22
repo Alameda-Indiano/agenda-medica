@@ -13,7 +13,7 @@ class CreatePatientController {
         private createPatient: CreatePatientService
     ) {};
 
-    async handle(req: IRequest<ICreatePatientDTO>, res: IResponse<IResponseError | IResponseSucess<Patient>>) {
+    async handle(req: IRequest<ICreatePatientDTO, null>, res: IResponse<IResponseError | IResponseSucess<Patient>>) {
 
         try {
             
@@ -36,18 +36,19 @@ class CreatePatientController {
                 const { 
                     message, 
                     statusCode,
-                    value: { id, name, email, age, sex }
+                    value: { id, name, email, age, sex, status }
                 } = result.sucess;
 
                 return res.status(statusCode).json({ 
                     message,
                     statusCode,
                     value: {
-                        id: id as string, 
+                        id: id as number, 
                         name,  
                         email,
                         age, 
-                        sex
+                        sex,
+                        status
                     }
                 });
             };

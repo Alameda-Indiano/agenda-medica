@@ -23,7 +23,12 @@ module.exports = {
         allowNull: false
       },
       sex: {
-        type: Sequelize.ENUM('Masculino', 'Feminino')
+        type: Sequelize.ENUM('Masculino', 'Feminino'),
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.ENUM('Ativo', 'Inativo'),
+        defaultValue: 'Ativo'
       },
       created_at: {
         allowNull: false,

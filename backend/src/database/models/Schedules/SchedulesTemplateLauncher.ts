@@ -21,8 +21,8 @@ const SchedulesTemplateLauncher: ITemplateLauncher = {
                 allowNull: false
             },
             status: {
-                type: DataTypes.ENUM('Agendado', 'Em Andamento', 'Finalizado', 'Cancelado'),
-                allowNull: false
+                type: DataTypes.ENUM('Novo Agendamento', 'Em Andamento', 'Finalizado', 'Cancelado'),
+                defaultValue: 'Novo Agendamento'
             },
             patient_id: {
                 type: DataTypes.INTEGER,

@@ -1,8 +1,7 @@
 import { Either, error, sucess } from "../../../../shared/ErrorHandling/Either";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 import { ParametersError } from "../../../../shared/ErrorHandling/ParametersError";
-
-type IPatientSex = 'Masculino' | 'Feminino'; 
+import { IPatientSex } from "../../interfaces";
 
 class Sex {
 
