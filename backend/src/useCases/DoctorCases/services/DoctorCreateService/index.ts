@@ -3,7 +3,6 @@ import { Doctor } from '../../../../entities/Doctors';
 import { ICreateDoctorDTO } from '../../IDoctorDTOs/ICreateDoctorDTO';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
-import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
 import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 
@@ -15,7 +14,7 @@ class CreateDoctorService {
         private doctorRepository: IDoctorRepository
     ) {};
 
-    async execute({ name, email }: ICreateDoctorDTO): Promise<Either<ParametersError, IResponseSucess<Doctor>>> {
+    async execute({ name, email }: ICreateDoctorDTO): Promise<Either<ParametersError, ParametersSucess<Doctor>>> {
         
         const doctorAlreadyExists = await this.doctorRepository.exists(email);
 

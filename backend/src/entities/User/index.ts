@@ -18,7 +18,7 @@ class User {
     public declare email: Email;
     public declare password: Password;
 
-    private constructor(props: Omit<User, 'id'>, id?: number) {
+    private constructor(props: Omit<User, 'id'>) {
         return Object.assign(this, props);
     };
 

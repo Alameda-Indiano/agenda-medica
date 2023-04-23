@@ -12,6 +12,9 @@ import { Password } from '../../../entities/User/validator/password';
 class UsersModel extends Model<InferAttributes<UsersModel>, InferCreationAttributes<UsersModel>> {
 
     declare id?: CreationOptional<number>;
+    declare code?: CreationOptional<string>;
+    declare code_expires_in?: CreationOptional<Date>;
+
     declare name: Name | string;
     declare email: Email | string;
     declare password: Password | string;

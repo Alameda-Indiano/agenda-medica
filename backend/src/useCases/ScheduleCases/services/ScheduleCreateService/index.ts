@@ -3,7 +3,6 @@ import { Schedule } from '../../../../entities/Schedules';
 import { ICreateScheduleDTO } from '../../IScheduleDTOs/ICreateScheduleDTO';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
-import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
 import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 
@@ -15,7 +14,7 @@ class CreateScheduleService {
         private schedulesRepository: IScheduleRepository
     ) {};
 
-    async execute({ name, status, schedule_date, patient_id, doctor_id }: ICreateScheduleDTO): Promise<Either<ParametersError, IResponseSucess<Schedule>>> {
+    async execute({ name, status, schedule_date, patient_id, doctor_id }: ICreateScheduleDTO): Promise<Either<ParametersError, ParametersSucess<Schedule>>> {
         
         const scheduleAlreadyExists = await this.schedulesRepository.exists(schedule_date, patient_id);
 

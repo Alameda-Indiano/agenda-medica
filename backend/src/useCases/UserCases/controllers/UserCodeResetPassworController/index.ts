@@ -1,23 +1,25 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
+import { ICodeReqResetPasswordDTO, ISendMailResetPassWordDTO } from "../../IUserDTOs/ICodeReqResetPasswordDTO";
+import { UserCodeResetPassworService } from "../../services/UserCodeResetPassworService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
-import { Doctor } from "../../../../entities/Doctors";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
+import { NextFunction } from "express";
 
-class GeneratorJwtController {
+class UserCodeResetPassworController {
     
     constructor(
-        private createDoctor: CreateDoctorService
+        private userCodeResetPassworService: UserCodeResetPassworService
     ) {};
 
-    async handle(req: IRequest<ICreateDoctorDTO, null>, res: IResponse<IResponseError | IResponseSucess<Doctor>>) {
+    async handle(req: IRequest<ICodeReqResetPasswordDTO | ISendMailResetPassWordDTO, any>, res: IResponse<IResponseError | IResponseSucess<undefined>>, next: NextFunction) {
 
         try {
             
-            const { name, email } = req.body;
+            const { email } = req.body;
 
-            const result = await this.createDoctor.execute({ name, email });
+            const result = await this.userCodeResetPassworService.execute({ email });
 
             if (result.isException()) {
 
@@ -30,22 +32,9 @@ class GeneratorJwtController {
             };
 
             if (result.isSucess()) {
-
-                const { 
-                    message, 
-                    statusCode,
-                    value: { id, name, email }
-                } = result.sucess;
-
-                return res.status(statusCode).json({ 
-                    message,
-                    statusCode,
-                    value: {
-                        id: id as number, 
-                        name,  
-                        email
-                    }
-                });
+                const { code, email } = result.sucess;
+                req.body = { code, email };
+                next();
             };
 
         } catch (error: any) {
@@ -56,4 +45,4 @@ class GeneratorJwtController {
 
 };
 
-export { GeneratorJwtController };
+export { UserCodeResetPassworController };

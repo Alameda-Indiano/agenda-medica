@@ -3,7 +3,6 @@ import { Patient } from '../../../../entities/Patients';
 import { ICreatePatientDTO } from '../../IPatientDTOs/ICreatePatientDTO';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
-import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
 import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 
@@ -15,7 +14,7 @@ class CreatePatientService {
         private patientsRepository: IPatientRepository
     ) {};
 
-    async execute({ name, email, age, sex }: ICreatePatientDTO): Promise<Either<ParametersError, IResponseSucess<Patient>>> {
+    async execute({ name, email, age, sex }: ICreatePatientDTO): Promise<Either<ParametersError, ParametersSucess<Patient>>> {
         
         const patientAlreadyExists = await this.patientsRepository.exists(email);
 

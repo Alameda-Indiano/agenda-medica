@@ -23,6 +23,12 @@ const UsersTemplateLauncher: ITemplateLauncher = {
             password: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            code: {
+                type: DataTypes.STRING,
+            },
+            code_expires_in: {
+                type: DataTypes.DATE,
             }
         }, {
             sequelize,

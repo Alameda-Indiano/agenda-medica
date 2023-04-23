@@ -1,9 +1,8 @@
+import jwt from "jsonwebtoken";
 import { NextFunction, Response } from "express";
 import { IRequest } from "../../../shared/interfaces/IRequest";
 import { statuscode } from "../../../shared/interfaces/StatusCode";
-import jwt from "jsonwebtoken";
 import { IResponse } from "../../../shared/interfaces/IResponse";
-import { ParametersError } from "../../../shared/ErrorHandling/ParametersError";
 import { IResponseError } from "../../../shared/ErrorHandling/ParametersError/IResponseError";
 
 class VerifyToken {

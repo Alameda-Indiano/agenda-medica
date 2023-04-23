@@ -1,7 +1,6 @@
 import { IScheduleRepository } from '../../../../repositories/Schedules/ISchedulesRepositories';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
-import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
 import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 import { PeriodParamsValue } from '../../IScheduleDTOs/ISchedulesByPeriodDTO';
@@ -15,7 +14,7 @@ class FilterSchedulesByDoctorAndPeriodService {
         private periodFilterGeneratorService: PeriodFilterGeneratorService
     ) {};
 
-    async execute(FilterByDoctorAndPeriod: string): Promise<Either<ParametersError, IResponseSucess<IDefaultReturnDTO>>> {
+    async execute(FilterByDoctorAndPeriod: string): Promise<Either<ParametersError, ParametersSucess<IDefaultReturnDTO>>> {
 
         const [ doctorName, period ] = FilterByDoctorAndPeriod.split('-');
 

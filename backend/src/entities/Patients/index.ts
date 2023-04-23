@@ -12,7 +12,7 @@ export interface IDataPatient {
     email: string;
     age: Date;
     sex: IPatientSex;
-    status: IPatientStatus;
+    status?: IPatientStatus;
 };
 
 class Patient {
@@ -23,7 +23,7 @@ class Patient {
     public declare email: Email;
     public declare age: Age;
     public declare sex: Sex;
-    public declare status: Status;
+    public declare status?: Status;
 
     private constructor(props: Omit<Patient, 'id'>, id?: number) {
         return Object.assign(this, props);
@@ -35,7 +35,7 @@ class Patient {
         const email = Email.create(dataPatient.email); 
         const age = Age.create(dataPatient.age); 
         const sex = Sex.create(dataPatient.sex); 
-        const status = Status.create(dataPatient.status); 
+        const status = Status.create(dataPatient.status as IPatientStatus); 
 
         if (name.isException()) return error( name.exception );
         if (email.isException()) return error( email.exception );

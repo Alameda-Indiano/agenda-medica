@@ -3,7 +3,6 @@ import { User } from '../../../../entities/User';
 import { ICreateUserDTO } from '../../IUserDTOs/ICreateUserDTO';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
-import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
 import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 import bcrypt from 'bcryptjs';
@@ -16,7 +15,7 @@ class CreateUserService {
         private usersRepository: IUserRepository
     ) {};
 
-    async execute({ name, email, password }: ICreateUserDTO): Promise<Either<ParametersError, IResponseSucess<User>>> {
+    async execute({ name, email, password }: ICreateUserDTO): Promise<Either<ParametersError, ParametersSucess<User>>> {
         
         const userAlreadyExists = await this.usersRepository.exists(email);
 
@@ -44,7 +43,7 @@ class CreateUserService {
         };
 
         return sucess(
-            new ParametersSucess('Usuário cadastrado com sucesso', statuscode.CREATED,  this._user)
+            new ParametersSucess('Usuário cadastrado com sucesso', statuscode.CREATED, this._user)
         );
          
     };

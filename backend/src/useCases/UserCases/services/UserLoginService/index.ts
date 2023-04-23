@@ -15,7 +15,7 @@ class UserLoginService {
         private generatorJwtService: GeneratorJwtService
     ){};
 
-    async execute({ email, password }: ILoginUserDTO): Promise<Either<ParametersError, IResponseSucess<IResponseLoginUser>>> {
+    async execute({ email, password }: ILoginUserDTO): Promise<Either<ParametersError, ParametersSucess<IResponseLoginUser>>> {
         
         const userAlreadyExists = await this.usersRepository.exists(email);
 
