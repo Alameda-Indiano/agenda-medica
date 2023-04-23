@@ -3,9 +3,9 @@ import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
-import { ICodeResetPassWordDTO } from "../../IUserDTOs/ICodeResetPassWordDTO";
 import { IResponseJwtDTO } from "../../IUserDTOs/IResponseJwtDTO";
 import { UserResetPasswordService } from "../../services/UserResetPasswordService";
+import { IResetPassWordDTO } from "../../IUserDTOs/IResetPassWordDTO";
 
 class UserResetPasswordController {
     
@@ -13,7 +13,7 @@ class UserResetPasswordController {
         private userResetPasswordService: UserResetPasswordService
     ) {};
 
-    async handle(req: IRequest<ICodeResetPassWordDTO, any>, res: IResponse<IResponseError | IResponseSucess<IResponseJwtDTO>>) {
+    async handle(req: IRequest<IResetPassWordDTO, any>, res: IResponse<IResponseError | IResponseSucess<IResponseJwtDTO>>) {
 
         try {
             

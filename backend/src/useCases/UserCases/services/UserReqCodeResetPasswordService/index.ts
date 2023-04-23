@@ -5,6 +5,7 @@ import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
 import { GeneratorCodeService } from '../../../../shared/Services/GeneratorCodeService';
+import bcrypt from 'bcryptjs';
 
 class UserReqCodeResetPasswordService {
 
@@ -19,9 +20,9 @@ class UserReqCodeResetPasswordService {
 
         if (!userAlreadyExists) return error(new ParametersError('Could not find a user with the email entered!', statuscode.BAD_REQUEST));
 
-        const { code, codeExpiresIn } = this.generatorCodeService.execute({ expiresMin: 10 });
+        let { code, codeExpiresIn } = this.generatorCodeService.execute({ expiresMin: 10 });
 
-        const resultSetCode = await this.usersRepository.setCodeResetPassword(code, codeExpiresIn, email);
+        const resultSetCode = await this.usersRepository.setCodeResetPassword(bcrypt.hashSync(code, 8), codeExpiresIn, email);
 
         if (!resultSetCode) return error(new ParametersError('The code for password reset could not be generated.', statuscode.INTERNAL_SERVER_ERROR));
 

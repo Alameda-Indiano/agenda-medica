@@ -1,5 +1,4 @@
 import { IUserRepository } from '../../../../repositories/Users/IUsersRepositories';
-import { ICodeResetPassWordDTO } from '../../IUserDTOs/ICodeResetPassWordDTO';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
@@ -8,6 +7,7 @@ import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSuc
 import { IResponseJwtDTO } from '../../IUserDTOs/IResponseJwtDTO';
 import { PasswordValidate } from '../../../../shared/utils/PasswordValidate';
 import bcrypt from 'bcryptjs';
+import { IResetPassWordDTO } from '../../IUserDTOs/IResetPassWordDTO';
 
 class UserResetPasswordService {
 
@@ -16,21 +16,19 @@ class UserResetPasswordService {
         private generatorJwtService: GeneratorJwtService
     ){};
 
-    async execute({ email, code, password }: ICodeResetPassWordDTO): Promise<Either<ParametersError, ParametersSucess<IResponseJwtDTO>>> {
+    async execute({ email, code, password }: IResetPassWordDTO): Promise<Either<ParametersError, ParametersSucess<IResponseJwtDTO>>> {
         
         const userAlreadyExists = await this.usersRepository.exists(email);
 
         if (!userAlreadyExists) return error(new ParametersError('Could not find a user with the email entered!', statuscode.BAD_REQUEST));
 
-        if (userAlreadyExists.code !== code) return error(new ParametersError('The password reset code you entered is incorrect.', statuscode.NOT_FOUND)) 
+        if (!bcrypt.compareSync(code, userAlreadyExists.code as string)) return error(new ParametersError('The password reset code you entered is incorrect.', statuscode.NOT_FOUND)) 
 
         if (userAlreadyExists.code_expires_in && userAlreadyExists.code_expires_in < new Date()) return error(new ParametersError('The verification code for password reset has expired.', statuscode.NOT_FOUND));
 
         if (!PasswordValidate(password)) return error(new ParametersError('The password does not follow the expected pattern! (One number, one capital letter & one special character)', statuscode.BAD_REQUEST));
 
-        password = bcrypt.hashSync(password, 8);
-
-        const userPasswordChanged = await this.usersRepository.resetPassword(password, email);
+        const userPasswordChanged = await this.usersRepository.resetPassword(bcrypt.hashSync(password, 8), email);
 
         if (!userPasswordChanged) return error(new ParametersError('The user password could not be changed.', statuscode.INTERNAL_SERVER_ERROR));
 

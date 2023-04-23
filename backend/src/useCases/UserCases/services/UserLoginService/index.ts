@@ -22,9 +22,7 @@ class UserLoginService {
 
         if (!userAlreadyExists) return error(new ParametersError('Incorrect password or email address!', statuscode.BAD_REQUEST));
 
-        const isValidPassword = bcrypt.compareSync(password, userAlreadyExists.password as string);
-
-        if (!isValidPassword) return error(new ParametersError('Incorrect password or email address!', statuscode.BAD_REQUEST));
+        if (!bcrypt.compareSync(password, userAlreadyExists.password as string)) return error(new ParametersError('Incorrect password or email address!', statuscode.BAD_REQUEST));
 
         const jwt = this.generatorJwtService.execute({ user_id: userAlreadyExists.id as number });
 
