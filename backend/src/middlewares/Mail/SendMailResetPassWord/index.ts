@@ -2,10 +2,10 @@ import { IRequest } from "../../../shared/interfaces/IRequest";
 import { code, statuscode } from "../../../shared/interfaces/StatusCode";
 import { IResponse } from "../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ISendMailResetPassWordDTO } from "../../../useCases/UserCases/IUserDTOs/ICodeReqResetPasswordDTO";
 import { ResetPassWordTemplateMail } from "../Templates/ResetPassWordTemplateMail";
 import { IResponseSucess } from "../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { ISendMailService } from "../../../shared/Services/SendMailService/ISendMailService";
+import { ICodeResetPassWordDTO } from "../../../useCases/UserCases/IUserDTOs/ICodeResetPassWordDTO";
 
 class SendMailResetPassWord {
 
@@ -13,7 +13,7 @@ class SendMailResetPassWord {
         private sendMailService: ISendMailService
     ){}
 
-    public async handle(req: IRequest<ISendMailResetPassWordDTO, any>, res: IResponse<IResponseError | IResponseSucess<undefined>>) {
+    public async handle(req: IRequest<ICodeResetPassWordDTO, any>, res: IResponse<IResponseError | IResponseSucess<undefined>>) {
 
         try {
             

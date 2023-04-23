@@ -1,25 +1,26 @@
 import { IRequest } from "../../../../shared/interfaces/IRequest";
 import { IResponse } from "../../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../../shared/ErrorHandling/ParametersError/IResponseError";
-import { ICodeReqResetPasswordDTO, ISendMailResetPassWordDTO } from "../../IUserDTOs/ICodeReqResetPasswordDTO";
-import { UserCodeResetPassworService } from "../../services/UserCodeResetPassworService";
+import { UserReqCodeResetPasswordService } from "../../services/UserReqCodeResetPasswordService";
 import { IResponseSucess } from "../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess";
 import { statuscode } from "../../../../shared/interfaces/StatusCode";
 import { NextFunction } from "express";
+import { IReqResetPasswordDTO } from "../../IUserDTOs/IReqResetPasswordDTO";
+import { ICodeResetPassWordDTO } from "../../IUserDTOs/ICodeResetPassWordDTO";
 
-class UserCodeResetPassworController {
+class UserReqCodeResetPasswordController {
     
     constructor(
-        private userCodeResetPassworService: UserCodeResetPassworService
+        private userReqCodeResetPasswordService: UserReqCodeResetPasswordService
     ) {};
 
-    async handle(req: IRequest<ICodeReqResetPasswordDTO | ISendMailResetPassWordDTO, any>, res: IResponse<IResponseError | IResponseSucess<undefined>>, next: NextFunction) {
+    async handle(req: IRequest<IReqResetPasswordDTO | ICodeResetPassWordDTO, any>, res: IResponse<IResponseError | IResponseSucess<undefined>>, next: NextFunction) {
 
         try {
             
             const { email } = req.body;
 
-            const result = await this.userCodeResetPassworService.execute({ email });
+            const result = await this.userReqCodeResetPasswordService.execute({ email });
 
             if (result.isException()) {
 
@@ -45,4 +46,4 @@ class UserCodeResetPassworController {
 
 };
 
-export { UserCodeResetPassworController };
+export { UserReqCodeResetPasswordController };

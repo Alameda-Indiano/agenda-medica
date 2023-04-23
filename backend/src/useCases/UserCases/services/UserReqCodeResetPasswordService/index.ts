@@ -1,26 +1,25 @@
 import { IUserRepository } from '../../../../repositories/Users/IUsersRepositories';
-import { ICodeReqResetPasswordDTO, IResCodeResetPassWord } from '../../IUserDTOs/ICodeReqResetPasswordDTO';
+import { IReqResetPasswordDTO } from '../../IUserDTOs/IReqResetPasswordDTO';
+import { ICodeResetPassWordDTO } from '../../IUserDTOs/ICodeResetPassWordDTO';
 import { Either, error, sucess } from '../../../../shared/ErrorHandling/Either';
 import { ParametersError } from '../../../../shared/ErrorHandling/ParametersError';
-import { IResponseSucess } from '../../../../shared/ErrorHandling/ParametersSucess/IResponseSucess';
-import { ParametersSucess } from '../../../../shared/ErrorHandling/ParametersSucess';
 import { statuscode } from '../../../../shared/interfaces/StatusCode';
-import { GeneratorcCodeService } from '../../../../shared/Services/GeneratorcCodeService';
+import { GeneratorCodeService } from '../../../../shared/Services/GeneratorCodeService';
 
-class UserCodeResetPassworService {
+class UserReqCodeResetPasswordService {
 
     constructor(
         private usersRepository: IUserRepository,
-        private generatorcCodeService: GeneratorcCodeService
+        private generatorCodeService: GeneratorCodeService
     ){};
 
-    async execute({ email }: ICodeReqResetPasswordDTO): Promise<Either<ParametersError, IResCodeResetPassWord>> {
+    async execute({ email }: IReqResetPasswordDTO): Promise<Either<ParametersError, ICodeResetPassWordDTO>> {
         
         const userAlreadyExists = await this.usersRepository.exists(email);
 
         if (!userAlreadyExists) return error(new ParametersError('Could not find a user with the email entered!', statuscode.BAD_REQUEST));
 
-        const { code, codeExpiresIn } = this.generatorcCodeService.execute({ expiresMin: 10 });
+        const { code, codeExpiresIn } = this.generatorCodeService.execute({ expiresMin: 10 });
 
         const resultSetCode = await this.usersRepository.setCodeResetPassword(code, codeExpiresIn, email);
 
@@ -32,4 +31,4 @@ class UserCodeResetPassworService {
 
 };
 
-export { UserCodeResetPassworService };
+export { UserReqCodeResetPasswordService };

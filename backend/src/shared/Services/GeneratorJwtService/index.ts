@@ -1,12 +1,7 @@
 import jwt from "jsonwebtoken";
-
-interface IParamsJWT {
-    user_id: number
-};
+import { IParamsJWT } from "./IGeneratorJwtService";
 
 class GeneratorJwtService {
-
-    constructor(){};
 
     public execute({ user_id }: IParamsJWT): string {
 

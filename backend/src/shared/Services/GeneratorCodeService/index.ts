@@ -1,18 +1,7 @@
 import crypto from 'crypto';
+import { ICodeExpiresIn, IResCodeExpiresIn } from './IGeneratorCodeService';
 
-//min
-interface ICodeExpiresIn {
-    expiresMin: number
-};
-
-interface IResCodeExpiresIn {
-    codeExpiresIn: Date,
-    code: string
-};
-
-class GeneratorcCodeService {
-
-    constructor(){};
+class GeneratorCodeService {
 
     public execute({ expiresMin }: ICodeExpiresIn): IResCodeExpiresIn {
 
@@ -31,5 +20,5 @@ class GeneratorcCodeService {
 };
 
 export {
-    GeneratorcCodeService
+    GeneratorCodeService
 };

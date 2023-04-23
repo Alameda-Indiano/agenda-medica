@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { NextFunction, Response } from "express";
+import { NextFunction } from "express";
 import { IRequest } from "../../../shared/interfaces/IRequest";
 import { statuscode } from "../../../shared/interfaces/StatusCode";
 import { IResponse } from "../../../shared/interfaces/IResponse";

@@ -12,4 +12,6 @@ UserRoutes.post('/User/PasswordResetRequest',
     (req, res) => MailFactory.sendMailResetPassWord().handle(req, res),
 );
 
+UserRoutes.post('/User/ResetPassword', (req, res) => UserFactory.resetPassword().handle(req, res));
+
 export { UserRoutes };

@@ -3,11 +3,6 @@ interface ILoginUserDTO {
     password: string;
 };
 
-interface IResponseLoginUser {
-    jwt: string
-};
-
 export {
-    ILoginUserDTO,
-    IResponseLoginUser
+    ILoginUserDTO
 };

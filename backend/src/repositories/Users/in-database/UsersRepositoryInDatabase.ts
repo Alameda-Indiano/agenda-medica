@@ -19,6 +19,15 @@ class UsersRepositoryInDatabase implements IUserRepository {
         const [ result ] = await UsersModel.update({ code, code_expires_in: codeExpiresIn }, { where: { email } });
 
         return !!result;
+
+    };
+
+    async resetPassword(password: string, email: string): Promise<boolean> {
+        
+        const [ result ] = await UsersModel.update({ password }, { where: { email } });
+
+        return !!result;
+
     };
 
 };

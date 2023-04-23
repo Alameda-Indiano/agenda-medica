@@ -1,7 +1,7 @@
 import { UsersRepositoryInDatabase } from "../../repositories/Users/in-database/UsersRepositoryInDatabase";
 import { IUserRepository } from "../../repositories/Users/IUsersRepositories";
 import { GeneratorJwtService } from "../../shared/Services/GeneratorJwtService";
-import { GeneratorcCodeService } from "../../shared/Services/GeneratorcCodeService";
+import { GeneratorCodeService } from "../../shared/Services/GeneratorCodeService";
 
 import { CreateUserService } from "./services/UserCreateService";
 import { CreateUserController } from "./controllers/UserCreateController";
@@ -9,19 +9,22 @@ import { CreateUserController } from "./controllers/UserCreateController";
 import { UserLoginService } from "./services/UserLoginService";
 import { UserLoginController } from "./controllers/UserLoginController";
 
-import { UserCodeResetPassworService } from "./services/UserCodeResetPassworService";
-import { UserCodeResetPassworController } from "./controllers/UserCodeResetPassworController";
+import { UserReqCodeResetPasswordService } from "./services/UserReqCodeResetPasswordService";
+import { UserReqCodeResetPasswordController } from "./controllers/UserReqCodeResetPasswordController";
+
+import { UserResetPasswordService } from "./services/UserResetPasswordService";
+import { UserResetPasswordController } from "./controllers/UserResetPasswordController";
 
 class UserModule {
 
     private userRepository: IUserRepository;
     private generatorJwtService: GeneratorJwtService;
-    private generatorcCodeService: GeneratorcCodeService;
+    private generatorCodeService: GeneratorCodeService;
 
     constructor() {
         this.userRepository = new UsersRepositoryInDatabase();
         this.generatorJwtService = new GeneratorJwtService();
-        this.generatorcCodeService = new GeneratorcCodeService();
+        this.generatorCodeService = new GeneratorCodeService();
     };
 
     public create() {
@@ -37,9 +40,15 @@ class UserModule {
     };
 
     public passwordResetRequest() {
-        const userCodeResetPassworService = new UserCodeResetPassworService(this.userRepository, this.generatorcCodeService);
-        const userCodeResetPassworController = new UserCodeResetPassworController(userCodeResetPassworService);
-        return userCodeResetPassworController;
+        const userReqCodeResetPasswordService = new UserReqCodeResetPasswordService(this.userRepository, this.generatorCodeService);
+        const userReqCodeResetPasswordController = new UserReqCodeResetPasswordController(userReqCodeResetPasswordService);
+        return userReqCodeResetPasswordController;
+    };
+
+    public resetPassword() {
+        const userResetPasswordService = new UserResetPasswordService(this.userRepository, this.generatorJwtService);
+        const userResetPasswordController = new UserResetPasswordController(userResetPasswordService);
+        return userResetPasswordController;
     };
 
 };
