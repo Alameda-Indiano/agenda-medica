@@ -42,6 +42,7 @@ class FilterSchedulesByPeriodController {
                 return res.status(statusCode).json({ 
                     message,
                     statusCode,
+                    jwt: req.jwt,
                     value: {
                         schedules, 
                         total_schedules

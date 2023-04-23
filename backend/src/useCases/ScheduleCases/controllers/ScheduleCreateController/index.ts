@@ -42,6 +42,7 @@ class CreateScheduleController {
                 return res.status(statusCode).json({ 
                     message,
                     statusCode,
+                    jwt: req.jwt,
                     value: {
                         id: id as number, 
                         name,  

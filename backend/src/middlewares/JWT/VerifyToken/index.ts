@@ -4,8 +4,13 @@ import { IRequest } from "../../../shared/interfaces/IRequest";
 import { statuscode } from "../../../shared/interfaces/StatusCode";
 import { IResponse } from "../../../shared/interfaces/IResponse";
 import { IResponseError } from "../../../shared/ErrorHandling/ParametersError/IResponseError";
+import { GeneratorJwtService } from "../../../shared/Services/GeneratorJwtService";
 
 class VerifyToken {
+
+    constructor(
+        private generatorJwtService: GeneratorJwtService
+    ){};
 
     public handle(req: IRequest<any, any>, res: IResponse<IResponseError>, next: NextFunction) {
 
@@ -26,10 +31,11 @@ class VerifyToken {
                 });
 
                 else {
-                    
+
                     //@ts-ignore
-                    req.user_id = decoded.user_id;
+                    req.jwt = this.generatorJwtService.execute({ user_id: decoded.user_id });
                     next();
+
                 };
     
             });
