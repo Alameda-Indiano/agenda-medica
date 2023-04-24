@@ -16,7 +16,7 @@ class CreateScheduleService {
 
     async execute({ name, status, schedule_date, patient_id, doctor_id }: ICreateScheduleDTO): Promise<Either<ParametersError, ParametersSucess<Schedule>>> {
         
-        const scheduleAlreadyExists = await this.schedulesRepository.exists(schedule_date, patient_id);
+        const scheduleAlreadyExists = await this.schedulesRepository.exists(schedule_date, patient_id, doctor_id);
 
         if (!!scheduleAlreadyExists) return error(new ParametersError('There is already an appointment for this patient on this date.', statuscode.CONFLICT));
 
