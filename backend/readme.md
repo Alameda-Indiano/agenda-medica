@@ -1,16 +1,18 @@
-# Estrutura Base de API
-Essa é uma estrutura base para criação de APIs utilizando Express, TypeScript e Sequelize
+# API para Agenda Médica
+Essa API foi desenvolvida visando todo o fluxo de agendamento de consultas médicas.
 
 
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 - [Git](https://git-scm.com);
-- [Node.js](https://nodejs.org/en/);
+- [Node.js (v18.15.0)](https://nodejs.org/en/);
 - [VSCode](https://code.visualstudio.com/).
 
-Além disso será necessário ter uma conta em um banco de dados Postgres. Exemplo:
-- [Elephantsql](https://www.elephantsql.com/).
+Além disso será necessário ter constas nos seguintes serviços: 
+
+- [Elephantsql](https://www.elephantsql.com/);
+- [SendGrid](https://sendgrid.com).
 
 ___
 
@@ -23,7 +25,8 @@ $ git clone https://github.com/Alameda-Indiano/agenda-medica-backend.git
 
 #### Acesse a pasta do projeto no terminal/cmd
 ```bash
-$ cd agenda-medica-backend
+$ cd agenda-medica
+$ cd backend
 ```
 
 #### Instale as dependências
@@ -87,7 +90,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Sequelize](https://sequelize.org)
-- [Jest](https://www.npmjs.com/package/jest)
 
 ___
 
@@ -102,8 +104,6 @@ As seguintes dependências e bibliotecas foram usadas na construção do projeto
 - [Dotenv](https://www.npmjs.com/package/dotenv)
 - [Express](https://www.npmjs.com/package/express)
 - [Pg](https://www.npmjs.com/package/pg)
+- [@sendgrid/mail](https://www.npmjs.com/package/@sendgrid/mail)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 
-
-<h4 align="center"> 
-	🚧   Em construção...  🚧
-</h4>
