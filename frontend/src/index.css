@@ -44,3 +44,11 @@ table {
 *, ::after, ::before {
     box-sizing: border-box;
 }
+
+a:hover {
+
+    color: rgb(100, 155, 255);
+
+}
+
+

@@ -1,8 +1,11 @@
 import { FC } from "react";
-import { Apresentation, BannerBackground, ContainerButtons, ContainerHome, HomeLeft, HomeRigth, SectionHome, Title } from "./styled";
+import { Apresentation, ContainerButtons, HomeLeft, HomeRigth, Title } from "./styled";
 import ImageHome from '../../assets/images/home.png';
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
+import { BannerBackground } from "../../assets/styles/BannerBackground";
+import { Section } from "../../assets/styles/Section";
+import { AlignItemsCenter } from "../../assets/styles/AlignItemsCenter";
 
 export const Home: FC = () => {
 
@@ -11,10 +14,10 @@ export const Home: FC = () => {
     };
 
     return (
-        <BannerBackground>
+        <BannerBackground ViewHeight={100} >
             <Header/>
-            <SectionHome>
-                <ContainerHome>
+            <Section style={{ height: '100vh' }} >
+                <AlignItemsCenter>
                     <HomeLeft>
                        <Apresentation>
                             <Title>
@@ -31,8 +34,8 @@ export const Home: FC = () => {
                     <HomeRigth>
                         <img style={{ maxWidth: '100%' }} src={ ImageHome } alt="Imagem de paciente na maca." />
                     </HomeRigth>
-                </ContainerHome>
-            </SectionHome>
+                </AlignItemsCenter>
+            </Section>
         </BannerBackground>
     )
 

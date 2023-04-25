@@ -4,7 +4,7 @@ import ImageIcone from '../../assets/images/icone.png';
 
 export const Header: FC = () => {
 
-    const [ toogle, setToogle ] = useState< boolean >(false);
+    const [ toogle, setToogle ] = useState< boolean >(true);
 
     return (
         <styled.Header ToogleMenu={ toogle } >

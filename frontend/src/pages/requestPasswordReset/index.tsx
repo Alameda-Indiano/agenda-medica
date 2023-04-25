@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { AlignItemsCenter } from "../../assets/styles/AlignItemsCenter";
 import { BannerBackground } from "../../assets/styles/BannerBackground";
-import LoginImage from '../../assets/images/login_image.png';
 import { Section } from "../../assets/styles/Section";
 import { Form } from "../../components/Form";
 import { Header } from "../../components/Header";
+import LoginImage from '../../assets/images/login_image.png';
 import { Inputs } from "../../assets/styles/Inputs";
 import { Button } from "../../components/Button";
 import { FooterForm } from "../../assets/styles/FooterForm";
 
-export const Login: FC = () => {
+export const RequestPasswordReset: FC = () => {
 
     const teste = () => {
         
@@ -20,13 +20,12 @@ export const Login: FC = () => {
             <Header />
             <Section>
                 <AlignItemsCenter>
-                    <Form img={LoginImage} title="Realizar login" >
-                        <Inputs type="text" placeholder="Email" />
-                        <Inputs type="text" placeholder="Senha" />
-                        <Button eventClick={teste} >Enviar</Button>
+                    <Form img={LoginImage} title="Solicitar Redefinição de Senha" >
+                        <Inputs type="text" placeholder="Informe o seu email" />
+                        <Button eventClick={teste} >Enviar Código</Button>
                         <FooterForm>
-                            <a href="">Redefinir senha</a>
                             <a href="">Cadastre-se</a>
+                            <a href="">Enviar Código Novamente</a>
                         </FooterForm>
                     </Form>
                 </AlignItemsCenter>

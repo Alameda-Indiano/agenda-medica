@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const Header = styled.header<{ ToogleMenu: boolean }>`
 
     width: 100%;
+    z-index: 999;
+    position: fixed;
     background: white;
     padding: 1.5rem 3.8rem;
     align-items: center;
@@ -61,7 +63,7 @@ export const ContainerLinks = styled.ul<{ ToogleMenu: boolean }>`
     justify-content: space-around;
 
     li {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-family: math;
         cursor: pointer;
     }
