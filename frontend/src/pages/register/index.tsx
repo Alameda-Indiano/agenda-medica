@@ -25,7 +25,7 @@ export const Register: FC = () => {
                         <Inputs type="text" placeholder="Email" />
                         <Inputs type="text" placeholder="Senha" />
                         <Inputs type="text" placeholder="Confirmar senha" />
-                        <Button eventClick={teste} >Enviar</Button>
+                        <Button width="90%" eventClick={teste} >Enviar</Button>
                         <FooterForm>
                             <a href="">Realizar login</a>
                         </FooterForm>

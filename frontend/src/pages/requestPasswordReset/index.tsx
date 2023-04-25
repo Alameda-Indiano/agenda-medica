@@ -22,7 +22,8 @@ export const RequestPasswordReset: FC = () => {
                 <AlignItemsCenter>
                     <Form img={LoginImage} title="Solicitar Redefinição de Senha" >
                         <Inputs type="text" placeholder="Informe o seu email" />
-                        <Button eventClick={teste} >Enviar Código</Button>
+                        <Inputs type="text" placeholder="Código de 8 digitos" />
+                        <Button width="90%" eventClick={teste} >Solicitar</Button>
                         <FooterForm>
                             <a href="">Cadastre-se</a>
                             <a href="">Enviar Código Novamente</a>

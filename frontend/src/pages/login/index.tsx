@@ -23,7 +23,7 @@ export const Login: FC = () => {
                     <Form img={LoginImage} title="Realizar login" >
                         <Inputs type="text" placeholder="Email" />
                         <Inputs type="text" placeholder="Senha" />
-                        <Button eventClick={teste} >Enviar</Button>
+                        <Button width="90%" eventClick={teste} >Enviar</Button>
                         <FooterForm>
                             <a href="">Redefinir senha</a>
                             <a href="">Cadastre-se</a>

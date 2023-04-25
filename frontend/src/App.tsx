@@ -1,14 +1,17 @@
+import 'devextreme/dist/css/dx.light.css';
 import { FC } from "react";
-import { Home } from "./pages/home";
-import { Login } from "./pages/login";
-import { Register } from "./pages/register";
-import { RequestPasswordReset } from "./pages/requestPasswordReset";
-import { ResetPassword } from "./pages/resetPassword";
+import { Agenda } from './pages/agenda';
+import deMessages from "devextreme/localization/messages/de.json";
+import { locale, loadMessages } from "devextreme/localization";
 
 export const App: FC = () => {
+
+  loadMessages(deMessages);
+  locale(navigator.language);
+
   return (
     <div className="App">
-      <ResetPassword />
+      <Agenda />
     </div>
   )
 };

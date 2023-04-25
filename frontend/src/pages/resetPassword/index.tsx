@@ -21,10 +21,9 @@ export const ResetPassword: FC = () => {
             <Section>
                 <AlignItemsCenter>
                     <Form img={LoginImage} title="Redefinir senha" >
-                        <Inputs type="text" placeholder="Código de 8 digitos" />
                         <Inputs type="text" placeholder="Nova senha" />
                         <Inputs type="text" placeholder="Repetir senha" />
-                        <Button eventClick={teste} >Atualizar</Button>
+                        <Button width="90%" eventClick={teste} >Atualizar</Button>
                         <FooterForm>
                             <a href="">Cadastre-se</a>
                         </FooterForm>

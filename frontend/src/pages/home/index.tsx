@@ -26,8 +26,8 @@ export const Home: FC = () => {
                             </Title>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus cmodo viverra</p>
                             <ContainerButtons>
-                                <Button eventClick={teste} >Cadastre-se</Button>
-                                <Button eventClick={teste} >Realizar Login</Button>
+                                <Button width="90%" eventClick={teste} >Cadastre-se</Button>
+                                <Button width="90%" eventClick={teste} >Realizar Login</Button>
                             </ContainerButtons>
                        </Apresentation>
                     </HomeLeft>
