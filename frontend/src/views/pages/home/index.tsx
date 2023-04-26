@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { FC } from "react";
 import { Apresentation, ContainerButtons, HomeLeft, HomeRigth, Title } from "./styled";
 import ImageHome from '../../assets/images/home.png';
@@ -9,9 +10,7 @@ import { AlignItemsCenter } from "../../assets/styles/AlignItemsCenter";
 
 export const Home: FC = () => {
 
-    const teste = () => {
-
-    };
+    const navigate = useNavigate();
 
     return (
         <BannerBackground ViewHeight={100} >
@@ -26,8 +25,8 @@ export const Home: FC = () => {
                             </Title>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus cmodo viverra</p>
                             <ContainerButtons>
-                                <Button width="90%" eventClick={teste} >Cadastre-se</Button>
-                                <Button width="90%" eventClick={teste} >Realizar Login</Button>
+                                <Button width="90%" eventClick={() => navigate('/register')} >Cadastre-se</Button>
+                                <Button width="90%" eventClick={() => navigate('/login')} >Realizar Login</Button>
                             </ContainerButtons>
                        </Apresentation>
                     </HomeLeft>

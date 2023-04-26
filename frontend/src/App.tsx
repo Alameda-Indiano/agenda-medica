@@ -2,7 +2,8 @@ import 'devextreme/dist/css/dx.light.css';
 import { FC } from "react";
 import deMessages from "devextreme/localization/messages/de.json";
 import { locale, loadMessages } from "devextreme/localization";
-import { RequestPasswordReset } from './views/pages/requestPasswordReset';
+import { AppRouter } from './routes';
+import { AuthUserProvider } from './context/AuthContext';
 
 export const App: FC = () => {
 
@@ -10,8 +11,8 @@ export const App: FC = () => {
   locale(navigator.language);
 
   return (
-    <div className="App">
-      <RequestPasswordReset />
-    </div>
+    <AuthUserProvider>
+      <AppRouter />
+    </AuthUserProvider>
   )
 };

@@ -11,11 +11,15 @@ import { FooterForm } from "../../assets/styles/FooterForm";
 import { IUserCreateDTO } from "../../../useCases/User/IUserDTOs/UserCreate/IUserCreateDTO";
 import { UserCreateService } from "../../../useCases/User/services/UserCreateService/UserCreateService";
 import { UsersRepositoryInDatabase } from "../../../repositories/UserRepository/in-database/UsersRepositoryInDatabase";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Register: FC = () => {
     
     const userRepository = new UsersRepositoryInDatabase();
     const userCreateService = new UserCreateService(userRepository);
+
+    const navigate = useNavigate();
 
     const initialDataUser: IUserCreateDTO = {
         confirmPassword: '',
@@ -36,6 +40,7 @@ export const Register: FC = () => {
         if (statusCode === 201) {
             alert(message);
             setDataUser(initialDataUser);
+            navigate('/login');
         };
 
     };
@@ -52,7 +57,7 @@ export const Register: FC = () => {
                         <Inputs type="text" value={dataUser.confirmPassword} onChange={(e) => setDataUser({ ...dataUser, confirmPassword: e.target.value })} placeholder="Confirmar senha" />
                         <Button width="90%" eventClick={createUser} >Enviar</Button>
                         <FooterForm>
-                            <a href="">Realizar login</a>
+                            <Link to={'/login'} >Realizar login</Link>
                         </FooterForm>
                     </Form>
                 </AlignItemsCenter>

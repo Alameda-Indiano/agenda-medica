@@ -9,12 +9,8 @@ import * as styled from './styled';
 import DataGrid, {
     Column,
     Grouping,
-    GroupPanel,
     Scrolling,
-    Pager,
     Paging,
-    TotalItem,
-    Summary,
     SearchPanel,
 } from 'devextreme-react/data-grid';
 import { customers } from './test';
