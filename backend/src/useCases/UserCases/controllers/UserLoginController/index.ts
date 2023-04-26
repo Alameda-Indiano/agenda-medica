@@ -19,7 +19,7 @@ class UserLoginController {
             
             const { email, password } = req.body;
 
-            const result = await this.userLoginService.execute({ email, password });
+            const result = await this.userLoginService.execute({ email: email.toLowerCase(), password });
 
             if (result.isException()) {
 

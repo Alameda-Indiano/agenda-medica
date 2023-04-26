@@ -16,7 +16,7 @@ class AppController {
     private middlewares() {
         this.server.use(express.json());
         this.server.use(cors({
-            methods: '[GET, POST, DELETE, PUT]',
+            methods: ['GET', 'POST', 'DELETE', 'PUT'],
             origin: '*',
             allowedHeaders: 'Content-Type, Authorization',
             optionsSuccessStatus: 204

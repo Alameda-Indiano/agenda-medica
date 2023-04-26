@@ -19,7 +19,7 @@ class CreateUserController {
             
             const { name, email, password } = req.body;
 
-            const result = await this.createUser.execute({ name, email, password });
+            const result = await this.createUser.execute({ name: name.toLowerCase(), email: email.toLowerCase(), password });
 
             if (result.isException()) {
 

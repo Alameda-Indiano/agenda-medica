@@ -18,9 +18,9 @@ class UserReqCodeResetPasswordController {
 
         try {
             
-            const { email } = req.body;
+            const { email } = req.body; 
 
-            const result = await this.userReqCodeResetPasswordService.execute({ email });
+            const result = await this.userReqCodeResetPasswordService.execute({ email: email.toLowerCase() });
 
             if (result.isException()) {
 
