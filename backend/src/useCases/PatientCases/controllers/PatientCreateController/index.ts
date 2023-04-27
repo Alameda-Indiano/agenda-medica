@@ -19,7 +19,7 @@ class CreatePatientController {
             
             const { name, email, age, sex } = req.body;
 
-            const result = await this.createPatient.execute({ name, email, age, sex });
+            const result = await this.createPatient.execute({ name: name.toLowerCase(), email: email.toLowerCase(), age, sex });
 
             if (result.isException()) {
 

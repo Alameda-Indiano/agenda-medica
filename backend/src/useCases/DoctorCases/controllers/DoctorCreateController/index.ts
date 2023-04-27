@@ -19,7 +19,7 @@ class CreateDoctorController {
             
             const { name, email } = req.body;
 
-            const result = await this.createDoctor.execute({ name, email });
+            const result = await this.createDoctor.execute({ name: name.toLowerCase(), email: email.toLowerCase() });
 
             if (result.isException()) {
 
