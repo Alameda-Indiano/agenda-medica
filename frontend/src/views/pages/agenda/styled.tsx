@@ -9,13 +9,13 @@ export const Agenda = styled.div`
     min-height: 30rem;
     max-width: 75%;
     width: 90%;
+    overflow: hidden;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
     border-radius: 15px;
-    padding: 20px;
     flex-direction: column;
 
     @media (max-width: 1200px){

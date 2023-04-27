@@ -33,7 +33,7 @@ export const AuthUserProvider: FC<{ children: any }> = ({ children }) => {
             const { data: { message, value } } = await userLoginService.login({ email, password });
 
             localStorage.setItem("@Auth:token", value.jwt);
-            connectionAPI.defaults.headers.common["Authorization"] = `Bearer ${value.jwt}`;
+            connectionAPI.defaults.headers.common["Authorization"] = `${value.jwt}`;
             setLoggedUser(true);
             return message;
 
@@ -48,7 +48,7 @@ export const AuthUserProvider: FC<{ children: any }> = ({ children }) => {
         try {
 
             localStorage.setItem("@Auth:token", jwt);
-            connectionAPI.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+            connectionAPI.defaults.headers.common["Authorization"] = `${jwt}`;
             setLoggedUser(true);
 
         } catch (error) {

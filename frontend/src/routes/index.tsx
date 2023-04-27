@@ -7,6 +7,7 @@ import { ResetPassword } from "../views/pages/resetPassword";
 import { DashBoard } from "../views/pages/dashBoard";
 import { Agenda } from "../views/pages/agenda/";
 import { PrivateRoute } from "./privateRoute";
+import { FormCreateSchendules } from "../views/pages/formCreateSchendules";
 
 export const AppRouter = () => {
 
@@ -25,6 +26,10 @@ export const AppRouter = () => {
 
                 <Route path="/agendamento" element={<PrivateRoute />}>
                     <Route path="/agendamento" element={<Agenda />} />
+                </Route>
+
+                <Route path="/formcreateschendules" element={<PrivateRoute />}>
+                    <Route path="/formcreateschendules" element={<FormCreateSchendules />} />
                 </Route>
 
             </Routes>

@@ -22,6 +22,7 @@ export const Header: FC = () => {
                         <styled.ContainerLinks ToogleMenu={ toogle } >
                             <li><a onClick={() => navigate('/dashboard')} >Dashboard</a></li>
                             <li><a onClick={() => navigate('/agendamento')} >Agendamento</a></li>
+                            <li><a onClick={() => navigate('/formcreateschendules')} >Novo agendamento</a></li>
                             <li><a onClick={() => singOut()} >Sair</a></li>
                         </styled.ContainerLinks>
                     : ''

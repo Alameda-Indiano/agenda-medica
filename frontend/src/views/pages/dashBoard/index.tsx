@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useContext, useState } from 'react';
 import { AlignItemsCenter } from '../../assets/styles/AlignItemsCenter';
 import { BannerBackground } from '../../assets/styles/BannerBackground';
 import { Section } from '../../assets/styles/Section';
@@ -13,13 +13,18 @@ import DataGrid, {
     Paging,
     SearchPanel,
 } from 'devextreme-react/data-grid';
-import { customers } from './test';
+
+import { SchendulesContext } from '../../../context/SchendulesContext';
+import { useNavigate } from 'react-router-dom';
 
 export const DashBoard: FC = () => {
 
-    const teste = () => {
+    const navigate = useNavigate();
+    const { dataSchendules, searchSchenduleDate, schedulesCanceled } = useContext(SchendulesContext);
 
-    }
+    useEffect(() => {
+        searchSchenduleDate();
+    }, []);
 
     return (
         <BannerBackground ViewHeight={100} >
@@ -30,18 +35,18 @@ export const DashBoard: FC = () => {
                         <styled.DashBoardHeader>
                             <styled.ContainerIndicators>
                                 <styled.Indicators>
-                                    <span>100</span>
+                                    <span>{dataSchendules?.total_schedules ? dataSchendules?.total_schedules : 0 }</span>
                                     <h1>Total de Atendimentos (Hoje)</h1>
                                 </styled.Indicators>
                                 <styled.Indicators>
-                                    <span style={{ background: 'transparent' }} >100</span>
+                                    <span>{schedulesCanceled}</span>
                                     <h1 >Atendimentos Cancelados (Hoje)</h1>
                                 </styled.Indicators>
                             </styled.ContainerIndicators>
-                            <Button width='25%' eventClick={teste} >Adicionar</Button>
+                            <Button width='25%' eventClick={() => { navigate('/formcreateschendules') }} >Adicionar</Button>
                         </styled.DashBoardHeader>
                         <DataGrid
-                            dataSource={customers}
+                            dataSource={dataSchendules.schedules}
                             height="100%"
                             width="100%"
                             showBorders={true}
@@ -52,14 +57,16 @@ export const DashBoard: FC = () => {
                             <Paging defaultPageSize={100} />
                             <SearchPanel visible={true} highlightCaseSensitive={true} />
                             <Grouping autoExpandAll={false} />
-                            <Column dataField="CompanyName" dataType="string" />
-                            <Column dataField="Phone" dataType="string" />
-                            <Column dataField="Fax" dataType="string" />
-                            <Column dataField="City" dataType="string" />
-                            <Column dataField="State" dataType="string" groupIndex={0} />
+
+                            <Column dataField="doctor.name" dataType="string" groupIndex={0} />
+                            <Column dataField="patient.name" dataType="string" groupIndex={1} />
+
+                            <Column dataField="name" dataType="string" />
+                            <Column dataField="schedule_date" alignment='center' dataType="datetime" />
+                            <Column dataField="status" alignment='center' dataType="string" />
+
                         </DataGrid>
                     </styled.DashBoard>
-                    
                 </AlignItemsCenter>
             </Section>
         </BannerBackground>
