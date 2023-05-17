@@ -24,9 +24,9 @@ export const Header: FC = () => {
                 {
                     isLogged ? 
                         <styled.ContainerLinks ToogleMenu={ toogle } >
-                            <li><Link to={'/dashboard'}>Dashboard</Link></li>
-                            <li><Link to={'/agendamento'}>Agendamento</Link></li>
-                            <li><Link to={'/formcreateschendules'} >Novo agendamento</Link></li>
+                            <li><Link className="link" to={'/dashboard'}>Dashboard</Link></li>
+                            <li><Link className="link" to={'/agendamento'}>Agendamento</Link></li>
+                            <li><Link className="link" to={'/formcreateschendules'} >Novo agendamento</Link></li>
                             <li><a onClick={() => dispatch(singOut())} >Sair</a></li>
                         </styled.ContainerLinks>
                     : ''

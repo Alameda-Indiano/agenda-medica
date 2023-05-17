@@ -12,14 +12,15 @@ import { UserResetPasswordService } from "../../../useCases/User/services/UserRe
 import { UsersRepositoryInDatabase } from "../../../repositories/UserRepository/in-database/UsersRepositoryInDatabase";
 import { IUserResetPasswordDTO } from "../../../useCases/User/IUserDTOs/UseResetPassword/IUserResetPasswordDTO";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthUserContext } from "../../../context/AuthContext";
+import { useAppDispatch } from "../../../store";
+import { refreshToken } from "../../../store/slices/userSlice";
 
 export const ResetPassword: FC = () => {
 
     const usersRepositoryInDatabase = new UsersRepositoryInDatabase();
     const userResetPasswordService = new UserResetPasswordService(usersRepositoryInDatabase);
 
-    const { refreshToken } = useContext(AuthUserContext);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const initialStateUserResetPassWord: IUserResetPasswordDTO = { code: '', email: '', confirmPassword: '', password: '' };
@@ -56,7 +57,7 @@ export const ResetPassword: FC = () => {
             alert(message);
             setToogle(false);
             setDataUserResetPassWord(initialStateUserResetPassWord);
-            refreshToken(jwt);
+            dispatch(refreshToken({ jwt }))
             navigate('/dashboard');
 
         };

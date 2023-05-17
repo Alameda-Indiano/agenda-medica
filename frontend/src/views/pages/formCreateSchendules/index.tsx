@@ -1,8 +1,6 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SchendulesContext } from '../../../context/SchendulesContext';
 import { DashboardRepository } from '../../../repositories/DashboardRepository/in-database/DashboardRepositoryInDatabase';
-import { IDataItemSchedule, IDataSchedules } from '../../../useCases/Schendules/ISchendulesDTOs/IResponseSchendules';
 import { ISchendulesCreate } from '../../../useCases/Schendules/ISchendulesDTOs/ISchendulesCreate';
 import { SchendulesCreateService } from '../../../useCases/Schendules/SchendulesCreateService/SchendulesCreateService';
 import { AlignItemsCenter } from '../../assets/styles/AlignItemsCenter';
@@ -13,11 +11,22 @@ import { Option, Select } from '../../assets/styles/Select'
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { Header } from '../../components/Header';
+import { ListDoctorsService } from '../../../useCases/Doctor/ListDoctorsService/ListDoctorsService';
+import { ListPatientsService } from '../../../useCases/Patient/ListPatientsService/ListPatientsService';
+import { DoctorRepository } from '../../../repositories/DoctorRepository/in-database/DoctorRepositoryInDatabase';
+import { PatientRepository } from '../../../repositories/PatientRepository/in-database/PatientRepositoryInDatabase';
+import { IPatientData, IResponseListPatientDTOs } from '../../../useCases/Patient/IPatientsDTOs/IResponseListPatientDTOs';
+import { IDoctorData, IResponseListDoctorsDTOs } from '../../../useCases/Doctor/IDoctorsDTOs/IResponseListDoctorsDTOs';
 
 export const FormCreateSchendules: FC = () => {
 
     const dashboardRepository = new DashboardRepository();
+    const doctorRepository = new DoctorRepository();
+    const patientRepository = new PatientRepository();
+
     const schendulesCreateService = new SchendulesCreateService(dashboardRepository);
+    const listDoctorsService = new ListDoctorsService(doctorRepository);
+    const listPatientsService = new ListPatientsService(patientRepository);
 
     const navigate = useNavigate();
 
@@ -28,7 +37,19 @@ export const FormCreateSchendules: FC = () => {
         schedule_date: new Date()
     };
 
-    const { dataSchendules } = useContext(SchendulesContext);
+    const [ dataSelect, setDataSelect ] = useState<{doctors: Array<IDoctorData>, patients: Array<IPatientData>}>()
+
+    const listDoctorsAndPatients = async () => {
+
+        const doctors = await listDoctorsService.get();
+        const patients = await listPatientsService.get();
+
+        setDataSelect({ doctors: doctors.data.value, patients: patients.data.value });
+    };
+
+    useEffect(() => {
+        listDoctorsAndPatients();
+    }, []);
 
     const [dataSchendulesCreate, setDataSchendulesCreate] = useState<ISchendulesCreate>(initialDataSchendulesCreate);
 
@@ -64,15 +85,15 @@ export const FormCreateSchendules: FC = () => {
                         <Inputs value={dataSchendulesCreate.name} onChange={(e) => setDataSchendulesCreate({ ...dataSchendulesCreate, name: e.target.value })} type="text" placeholder="Nome" />
                         <Select value={dataSchendulesCreate.doctor_id} onChange={(e) => setDataSchendulesCreate({ ...dataSchendulesCreate, doctor_id: e.target.value })} >
                             {
-                                dataSchendules.schedules?.map((item: IDataItemSchedule) => (
-                                    <Option key={item.doctor.id} value={item.doctor_id} >{item.doctor.name}</Option>
+                                dataSelect?.doctors?.map((item: IDoctorData) => (
+                                    <Option key={item.id} value={item.id} >{item.name}</Option>
                                 ))
                             }
                         </Select>
                         <Select value={dataSchendulesCreate.patient_id} onChange={(e) => setDataSchendulesCreate({ ...dataSchendulesCreate, patient_id: e.target.value })}  >
                             {
-                                dataSchendules.schedules?.map((item: IDataItemSchedule) => (
-                                    <Option key={item.patient.id} value={item.patient_id} >{item.patient.name}</Option>
+                                dataSelect?.patients?.map((item: IPatientData) => (
+                                    <Option key={item.id} value={item.id} >{item.name}</Option>
                                 ))
                             }
                         </Select>

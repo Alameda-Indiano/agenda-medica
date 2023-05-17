@@ -20,16 +20,17 @@ export const AppRouter = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/resetpassword" element={<ResetPassword />} />
 
-                <Route path="/dashboard" element={<PrivateRoute />}>
+                <Route element={<PrivateRoute />}>
                     <Route path="/dashboard" element={<DashBoard />} />
+                    <Route path="/agendamento" element={<Agenda />} />
+                    <Route path="/formcreateschendules" element={<FormCreateSchendules />} />
                 </Route>
 
                 <Route path="/agendamento" element={<PrivateRoute />}>
-                    <Route path="/agendamento" element={<Agenda />} />
+                    
                 </Route>
 
                 <Route path="/formcreateschendules" element={<PrivateRoute />}>
-                    <Route path="/formcreateschendules" element={<FormCreateSchendules />} />
                 </Route>
 
             </Routes>

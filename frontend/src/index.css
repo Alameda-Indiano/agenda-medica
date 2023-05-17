@@ -52,6 +52,15 @@ a:hover {
 
 }
 
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.link:hover {
+    color: rgb(100, 155, 255);
+}
+
 .dx-datagrid {
     padding: 10px 0px;
     max-height: 455px;

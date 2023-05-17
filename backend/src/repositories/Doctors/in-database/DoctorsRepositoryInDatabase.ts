@@ -14,6 +14,11 @@ class DoctorsRepositoryInDatabase implements IDoctorRepository {
         return !!doctor;
     };
 
+    async list(): Promise<Array<Doctor>> {
+        const doctor = await DoctorsModel.findAll();
+        return doctor as Array<Doctor>;
+    };
+
 };
 
 export { DoctorsRepositoryInDatabase };
