@@ -1,11 +1,20 @@
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-
-import { AuthUserContext } from "../context/AuthContext";
+import { useAppDispatch, useAppSelector } from "../store";
+import { refreshToken } from "../store/slices/userSlice";
 
 export const PrivateRoute = () => {
-  
-    const { loggedUser } = useContext(AuthUserContext);
 
-    return loggedUser ? <Outlet /> : <Navigate to="/" />;
+    const dispatch = useAppDispatch();
+    const { isLogged } = useAppSelector((state) => state.user);
+
+    if (!isLogged) {
+        
+        const jwt = localStorage.getItem("@Auth:token");
+
+        if (!!jwt) dispatch(refreshToken({ jwt }));
+
+        return isLogged ? <Outlet /> : <Navigate to="/" />;
+
+    } else return <Outlet />;
+    
 };

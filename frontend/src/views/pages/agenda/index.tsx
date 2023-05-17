@@ -6,7 +6,6 @@ import { Header } from '../../components/Header';
 import * as styled from './styled';
 
 import Scheduler from 'devextreme-react/scheduler';
-import { data } from './test';
 import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { SchendulesContext } from '../../../context/SchendulesContext';

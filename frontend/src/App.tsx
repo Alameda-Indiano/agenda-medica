@@ -5,6 +5,9 @@ import { locale, loadMessages } from "devextreme/localization";
 import { AppRouter } from './routes';
 import { AuthUserProvider } from './context/AuthContext';
 import { SchendulesProvider } from './context/SchendulesContext';
+import { Provider } from 'react-redux'; 
+import { Store } from './store';
+
 
 export const App: FC = () => {
 
@@ -12,10 +15,8 @@ export const App: FC = () => {
   locale(navigator.language);
 
   return (
-    <AuthUserProvider>
-      <SchendulesProvider>
-        <AppRouter />
-      </SchendulesProvider>
-    </AuthUserProvider>
+    <Provider store={Store} >
+      <AppRouter />
+    </Provider>
   )
 };

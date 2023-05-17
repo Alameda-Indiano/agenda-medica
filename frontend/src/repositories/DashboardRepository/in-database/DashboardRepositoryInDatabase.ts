@@ -15,7 +15,7 @@ class DashboardRepository implements IDashboardRepository {
     };
 
     public async getByStatus({ status }: IGetByStatus): Promise<IResponseSchendules> {
-    
+
         const response: IResponseSchendules = await connectionAPI.get(`/Schedule/${status}`);
         return response;
 

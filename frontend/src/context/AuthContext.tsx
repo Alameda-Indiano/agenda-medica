@@ -34,6 +34,7 @@ export const AuthUserProvider: FC<{ children: any }> = ({ children }) => {
 
             localStorage.setItem("@Auth:token", value.jwt);
             connectionAPI.defaults.headers.common["Authorization"] = `${value.jwt}`;
+            
             setLoggedUser(true);
             return message;
 

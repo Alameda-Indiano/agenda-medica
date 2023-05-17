@@ -23,7 +23,7 @@ export interface IDataItemSchedule {
 export interface IDataSchedules {
     schedules: [
         IDataItemSchedule
-    ];
+    ] | [];
     total_schedules: number;
 }
 

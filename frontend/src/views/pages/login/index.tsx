@@ -10,12 +10,15 @@ import { Button } from "../../components/Button";
 import { FooterForm } from "../../assets/styles/FooterForm";
 import { IUserLoginDTO } from "../../../useCases/User/IUserDTOs/UserLogin/IUserLoginDTO";
 import { Link } from "react-router-dom";
-import { AuthUserContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../store";
+import { signIn } from "../../../store/slices/userSlice/thunk";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { searchSchenduleDate } from "../../../store/slices/scheanduleSlice/thunk";
 
 export const Login: FC = () => {
 
-    const { signIn } = useContext(AuthUserContext);
+    const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
 
@@ -29,9 +32,10 @@ export const Login: FC = () => {
     const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
-        const response = await signIn({ email: dataUser.email, password: dataUser.password });
+        const { payload } = await dispatch(signIn({ email: dataUser.email, password: dataUser.password }))
 
-        if (!!response) {
+        //@ts-ignore
+        if (payload.statusCode === 200) {
             setDataUser(initialDataUser);
             navigate('/dashboard');
         };
